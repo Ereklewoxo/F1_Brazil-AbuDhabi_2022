@@ -429,7 +429,7 @@ namespace F1_Brazil_GP_test
             Console.ForegroundColor = ConsoleColor.White;
             RedLights();
             Console.Clear();
-            Console.Write("Theres no Gameplay rofl\nCool lights tho");
+            Console.Write("Theres no Gameplay rofl\nCool lights tho ");
             Console.ReadKey();
         }
         public static void Map()
