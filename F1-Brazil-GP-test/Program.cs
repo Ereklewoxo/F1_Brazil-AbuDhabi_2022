@@ -16,41 +16,29 @@ namespace F1_Brazil_GP_test
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\nWhat's Your First Name?");
             string userFirstName = Console.ReadLine();
-            if (userFirstName.Length <= 1)
+            if (userFirstName.Length == 1)
             {
-                userFirstName += userFirstName += userFirstName;
+                userFirstName += ".";
+            }
+            else if (userFirstName.Length == 0)
+            {
+                userFirstName = "john";
             }
             userFirstName = userFirstName.Remove(1).ToUpper() + userFirstName.Remove(0, 1).ToLower();
             Console.WriteLine("And Your Last Name?");
             string userLastName = Console.ReadLine();
-            if (userLastName.Length <= 1)
+            if (userLastName.Length == 1)
             {
-                userLastName += userLastName += userLastName;
+                userLastName += ".";
+            }
+            else if (userLastName.Length == 0)
+            {
+                userLastName = "doe";
             }
             userLastName = userLastName.Remove(1).ToUpper() + userLastName.Remove(0, 1).ToLower();
             bool teamChosen;
             //teams
-            string ver = "Max Verstappen"; string verS = "VER";
-            string per = "Sergio Perez"; string perS = "PER";
-            string lec = "Charles Leclerc"; string lecS = "LEC";
-            string rus = "George Russell"; string rusS = "RUS";
-            string ham = "Lewis Hamilton"; string hamS = "HAM";
-            string sai = "Carlos Sainz"; string saiS = "SAI";
-            string nor = "Lando Norris"; string norS = "NOR";
-            string oco = "Esteban Ocon"; string ocoS = "OCO";
-            string alo = "Fernando Alonso"; string aloS = "ALO";
-            string bot = "Valtteri Bottas"; string botS = "BOT";
-            string vet = "Sebastian Vettel"; string vetS = "VET";
-            string ric = "Daniel Ricciardo"; string ricS = "RIC";
-            string mag = "Kevin Magnussen"; string magS = "MAG";
-            string gas = "Pierre Gasly"; string gasS = "GAS";
-            string str = "Lance Stroll"; string strS = "STR";
-            string msc = "Mick Schumacher"; string mscS = "MSC";
-            string tsu = "Yuki Tsunoda"; string tsuS = "TSU";
-            string zho = "Zhou Guanyu"; string zhoS = "ZHO";
-            string alb = "Alexander Albon"; string maxS = "ALB";
-            string dev = "Nyck De Vries"; string devS = "DEV";
-            var racerList = new List<string> { lec, ver, sai, per, ham, rus, alo, nor, oco, bot, ric, gas, mag, dev, tsu, msc, zho, vet, alb, str };
+            var racerList = new List<string> { "Charles Leclerc", "Max Verstappen", "Carlos Sainz", "Sergio Perez", "Lewis Hamilton", "George Russell", "Fernando Alonso", "Lando Norris", "Esteban Ocon", "Valtteri Bottas", "Daniel Ricciardo", "Pierre Gasly", "Kevin Magnussen", "Nyck De Vries", "Yuki Tsunoda", "Mick Schumacher", "Zhou Guanyu", "Sebastian Vettel", "Alexander Albon", "Lance Stroll" };
             do
             {
                 teamChosen = true;
@@ -405,7 +393,7 @@ namespace F1_Brazil_GP_test
                         writeLineup++;
                     }
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.Write("Press 'Enter' to continiue");
+                    Console.Write("Press 'Enter' to continue");
                     Console.ReadLine();
                 }
                 else if (preRace == "2")
@@ -413,7 +401,7 @@ namespace F1_Brazil_GP_test
                     Console.Clear();
                     Map();
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.Write("Press 'Enter' to continiue");
+                    Console.Write("Press 'Enter' to continue");
                     Console.ReadLine();
                 }
                 else if (preRace == "3")
@@ -422,7 +410,7 @@ namespace F1_Brazil_GP_test
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("Placeholder");
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.Write("Press 'Enter' to continiue");
+                    Console.Write("Press 'Enter' to continue");
                     Console.ReadLine();
                 }
                 else if (preRace == "4")
@@ -434,7 +422,7 @@ namespace F1_Brazil_GP_test
                     Console.Clear();
                     Console.WriteLine("Invalid input, type just the number");
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.Write("Press 'Enter' to continiue");
+                    Console.Write("Press 'Enter' to continue");
                     Console.ReadLine();
                 }
             } while (minute < 60);
