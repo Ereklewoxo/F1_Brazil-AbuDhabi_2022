@@ -12,7 +12,7 @@ namespace F1_Brazil_GP_test
             var teamList = new List<string> { "Mercedes", "Red Bull", "Ferrari", "McLaren", "Alpine", "AlphaTauri", "Aston Martin", "Williams", "Alfa Romeo", "Haas" };
             var racerList = new List<string> { "Charles Leclerc", "Max Verstappen", "Carlos Sainz", "Sergio Perez", "Lewis Hamilton", "George Russell", "Fernando Alonso", "Lando Norris", "Esteban Ocon", "Valtteri Bottas", "Daniel Ricciardo", "Pierre Gasly", "Kevin Magnussen", "Nyck De Vries", "Yuki Tsunoda", "Mick Schumacher", "Zhou Guanyu", "Sebastian Vettel", "Alexander Albon", "Lance Stroll" };
             var racerListS = new List<string> { "LEC", "VER", "SAI", "PER", "HAM", "RUS", "ALO", "NOR", "OCO", "BOT", "RIC", "GAS", "MAG", "DEV", "TSU", "MSC", "ZHO", "VET", "ALB", "STR" };
-            string userTeam;
+            string userTeam = "Audi";
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
@@ -73,17 +73,17 @@ namespace F1_Brazil_GP_test
             {
                 userNameS = userLastName.Remove(3).ToUpper();
             }
-            bool teamChosen;
-            bool racerReplaced;
             string replace;
             //teams
-            do
+            for (int i = 0; i < 1; i++)
             {
-                teamChosen = true;
                 int writeTeams = 0;
                 Console.WriteLine($"For which team do you wish to play {userName}?");
                 foreach (string item in teamList)
                 {
+                    if (writeTeams + 1 == 10)
+                    { Console.WriteLine(0 + " - " + teamList[writeTeams]); }
+                    else
                     Console.WriteLine(writeTeams + 1 + " - " + teamList[writeTeams]);
                     writeTeams++;
                 }
@@ -95,7 +95,7 @@ namespace F1_Brazil_GP_test
                     case "mercedes":
                     case "mersedes":
                         userTeam = teamList[0];
-                        do
+                        for (int t = 0; t < 1; t++)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.White;
@@ -108,7 +108,6 @@ namespace F1_Brazil_GP_test
                             Console.WriteLine($"1 - {racerList[4]}\n2 - {racerList[5]}");
                             Console.ForegroundColor = ConsoleColor.White;
                             replace = Console.ReadLine();
-                            racerReplaced = true;
                             switch (replace)
                             {
                                 case "1":
@@ -123,10 +122,10 @@ namespace F1_Brazil_GP_test
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     Console.WriteLine("Invalid input, type just the number");
                                     Console.ReadKey();
-                                    racerReplaced = false;
+                                    t--;
                                     break;
                             }
-                        } while (racerReplaced == false);
+                        } 
                         break;
                     case "2":
                     case "red":
@@ -134,7 +133,7 @@ namespace F1_Brazil_GP_test
                     case "redbull":
                     case "red bull":
                         userTeam = teamList[1];
-                        do
+                        for (int t = 0; t < 1; t++)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.White;
@@ -147,7 +146,6 @@ namespace F1_Brazil_GP_test
                             Console.WriteLine($"1 - {racerList[1]}\n2 - {racerList[3]}");
                             Console.ForegroundColor = ConsoleColor.White;
                             replace = Console.ReadLine();
-                            racerReplaced = true;
                             switch (replace)
                             {
                                 case "1":
@@ -162,16 +160,16 @@ namespace F1_Brazil_GP_test
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     Console.WriteLine("Invalid input, type just the number");
                                     Console.ReadKey();
-                                    racerReplaced = false;
+                                    t--;
                                     break;
                             }
-                        } while (racerReplaced == false);
+                        }
                         break;
                     case "3":
                     case "ferari":
                     case "ferrari":
                         userTeam = teamList[2];
-                        do
+                        for (int t = 0; t < 1; t++)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.White;
@@ -184,7 +182,6 @@ namespace F1_Brazil_GP_test
                             Console.WriteLine($"1 - {racerList[0]}\n2 - {racerList[2]}");
                             Console.ForegroundColor = ConsoleColor.White;
                             replace = Console.ReadLine();
-                            racerReplaced = true;
                             switch (replace)
                             {
                                 case "1":
@@ -199,16 +196,16 @@ namespace F1_Brazil_GP_test
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     Console.Write("Invalid input, type just the number");
                                     Console.ReadKey();
-                                    racerReplaced = false;
+                                    t--;
                                     break;
                             }
-                        } while (racerReplaced == false);
+                        } 
                         break;
                     case "4":
                     case "mcl":
                     case "mclaren":
                         userTeam = teamList[3];
-                        do
+                        for (int t = 0; t < 1; t++)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.White;
@@ -221,7 +218,6 @@ namespace F1_Brazil_GP_test
                             Console.WriteLine($"1 - {racerList[10]}\n2 - {racerList[7]}");
                             Console.ForegroundColor = ConsoleColor.White;
                             replace = Console.ReadLine();
-                            racerReplaced = true;
                             switch (replace)
                             {
                                 case "1":
@@ -236,16 +232,16 @@ namespace F1_Brazil_GP_test
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     Console.WriteLine("Invalid input, type just the number");
                                     Console.ReadKey();
-                                    racerReplaced = false;
+                                    t--;
                                     break;
                             }
-                        } while (racerReplaced == false);
+                        } 
                         break;
                     case "5":
                     case "alpine":
                     case "alpin":
                         userTeam = teamList[4];
-                        do
+                        for (int t = 0; t < 1; t++)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.White;
@@ -258,7 +254,6 @@ namespace F1_Brazil_GP_test
                             Console.WriteLine($"1 - {racerList[8]}\n2 - {racerList[6]}");
                             Console.ForegroundColor = ConsoleColor.White;
                             replace = Console.ReadLine();
-                            racerReplaced = true;
                             switch (replace)
                             {
                                 case "1":
@@ -273,17 +268,17 @@ namespace F1_Brazil_GP_test
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     Console.WriteLine("Invalid input, type just the number");
                                     Console.ReadKey();
-                                    racerReplaced = false;
+                                    t--;
                                     break;
                             }
-                        } while (racerReplaced == false);
+                        }
                         break;
                     case "6":
                     case "alphatauri":
                     case "alpha tauri":
                     case "tauri":
                         userTeam = teamList[5];
-                        do
+                        for (int t = 0; t < 1; t++)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.White;
@@ -296,7 +291,6 @@ namespace F1_Brazil_GP_test
                             Console.WriteLine($"1 - {racerList[11]}\n2 - {racerList[14]}");
                             Console.ForegroundColor = ConsoleColor.White;
                             replace = Console.ReadLine();
-                            racerReplaced = true;
                             switch (replace)
                             {
                                 case "1":
@@ -311,10 +305,10 @@ namespace F1_Brazil_GP_test
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     Console.WriteLine("Invalid input, type just the number");
                                     Console.ReadKey();
-                                    racerReplaced = false;
+                                    t--;
                                     break;
                             }
-                        } while (racerReplaced == false);
+                        } 
                         break;
                     case "7":
                     case "aston martin":
@@ -322,7 +316,7 @@ namespace F1_Brazil_GP_test
                     case "aston":
                     case "martin":
                         userTeam = teamList[6];
-                        do
+                        for (int t = 0; t < 1; t++)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.White;
@@ -335,7 +329,6 @@ namespace F1_Brazil_GP_test
                             Console.WriteLine($"1 - {racerList[17]}\n2 - {racerList[19]}");
                             Console.ForegroundColor = ConsoleColor.White;
                             replace = Console.ReadLine();
-                            racerReplaced = true;
                             switch (replace)
                             {
                                 case "1":
@@ -350,17 +343,17 @@ namespace F1_Brazil_GP_test
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     Console.WriteLine("Invalid input, type just the number");
                                     Console.ReadKey();
-                                    racerReplaced = false;
+                                    t--;
                                     break;
                             }
-                        } while (racerReplaced == false);
+                        }
                         break;
                     case "8":
                     case "willliams":
                     case "wiliams":
                     case "wil":
                         userTeam = teamList[7];
-                        do
+                        for (int t = 0; t < 1; t++)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.White;
@@ -373,7 +366,6 @@ namespace F1_Brazil_GP_test
                             Console.WriteLine($"1 - {racerList[13]}\n2 - {racerList[18]}");
                             Console.ForegroundColor = ConsoleColor.White;
                             replace = Console.ReadLine();
-                            racerReplaced = true;
                             switch (replace)
                             {
                                 case "1":
@@ -388,10 +380,10 @@ namespace F1_Brazil_GP_test
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     Console.WriteLine("Invalid input, type just the number");
                                     Console.ReadKey();
-                                    racerReplaced = false;
+                                    t--;
                                     break;
                             }
-                        } while (racerReplaced == false);
+                        } 
                         break;
                     case "9":
                     case "alfa romeo":
@@ -399,7 +391,7 @@ namespace F1_Brazil_GP_test
                     case "alfa":
                     case "romeo":
                         userTeam = teamList[8];
-                        do
+                        for (int t = 0; t < 1; t++)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.White;
@@ -412,7 +404,6 @@ namespace F1_Brazil_GP_test
                             Console.WriteLine($"1 - {racerList[9]}\n2 - {racerList[16]}");
                             Console.ForegroundColor = ConsoleColor.White;
                             replace = Console.ReadLine();
-                            racerReplaced = true;
                             switch (replace)
                             {
                                 case "1":
@@ -427,15 +418,16 @@ namespace F1_Brazil_GP_test
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     Console.WriteLine("Invalid input, type just the number");
                                     Console.ReadKey();
-                                    racerReplaced = false;
+                                    t--;
                                     break;
                             }
-                        } while (racerReplaced == false);
+                        } 
                         break;
-                    case "10":
+                    case "0":
                     case "haas":
+                    case "has":
                         userTeam = teamList[9];
-                        do
+                        for (int t = 0; t < 1; t++)
                         {
                             Console.Clear();
                             Console.ForegroundColor = ConsoleColor.White;
@@ -448,7 +440,6 @@ namespace F1_Brazil_GP_test
                             Console.WriteLine($"1 - {racerList[12]}\n2 - {racerList[15]}");
                             Console.ForegroundColor = ConsoleColor.White;
                             replace = Console.ReadLine();
-                            racerReplaced = true;
                             switch (replace)
                             {
                                 case "1":
@@ -463,17 +454,17 @@ namespace F1_Brazil_GP_test
                                     Console.ForegroundColor = ConsoleColor.Gray;
                                     Console.WriteLine("Invalid input, type just the number");
                                     Console.ReadKey();
-                                    racerReplaced = false;
+                                    t--;
                                     break;
                             }
-                        } while (racerReplaced == false);
-                        break; 
+                        } 
+                        break;
                     default:
+                        i--;
                         Console.WriteLine($"There's no such team as {userTeam}, try again");
-                        teamChosen = false;
                         break;
                 }
-            } while (teamChosen == false);
+            } 
             //preRace
             string pole;
             string pos2;
@@ -779,15 +770,13 @@ namespace F1_Brazil_GP_test
             } while (pole == pos2);
             var lineup = new List<string> { pole, pos2, pos3, pos4, pos5, pos6, pos7, pos8, pos9, pos10, pos11, pos12, pos13, pos14, pos15, pos16, pos17, pos18, pos19, pos20 };
             Console.WriteLine(lineup);
-            int minute = 30;
             int writeLineup;
-            do
+            for (int min = 30; min < 60; min++)
             {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Gray;
-                Console.WriteLine($"Date: Sun, Nov 13, 2022, 9:{minute}PM");
+                Console.WriteLine($"Date: Sun, Nov 13, 2022, 9:{min}PM");
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                minute++;
                 Console.Write("FORMULA 1 ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Sao Paulo Grand Prix\n\nThe Race is about to begin\nYou may: 1 Check starting positions\n         2 Check the circuit\n         3 Read the tutorial\n         4 Start the Race");
@@ -870,7 +859,7 @@ namespace F1_Brazil_GP_test
                 }
                 else if (preRace == "4")
                 {
-                    minute = 60;
+                    min = 60;
                 }
                 else
                 {
@@ -880,18 +869,17 @@ namespace F1_Brazil_GP_test
                     Console.Write("Press 'Enter' to continue");
                     Console.ReadKey();
                 }
-            } while (minute < 60);
+            }
             Console.Clear();
-            writeLineup = 0;
             Console.WriteLine();
-            do
+            for (int i = 0; i < lineup.Count; i++)
             {
                 Console.ForegroundColor = ConsoleColor.White;
-                if (writeLineup % 2 == 0)
-                { Console.Write($"   {lineupS[writeLineup]}"); }
+                if (i % 2 == 0)
+                { Console.Write($"   {lineupS[i]}"); }
                 else
-                { Console.Write($"           {lineupS[writeLineup]}"); }
-                if (lineupS[writeLineup] == userNameS)
+                { Console.Write($"           {lineupS[i]}"); }
+                if (lineupS[i] == userNameS)
                 {
                     switch (userTeam)
                     {
@@ -929,7 +917,7 @@ namespace F1_Brazil_GP_test
                 }
                 else 
                 { 
-                    switch (lineupS[writeLineup])
+                    switch (lineupS[i])
                     {
                         case "HAM":
                         case "RUS":
@@ -974,8 +962,7 @@ namespace F1_Brazil_GP_test
                     }
                 }
                 Console.WriteLine($"/");
-                writeLineup++;
-            } while (writeLineup < 20);
+            }
             RedLights();
             Console.Clear();
             Console.Write("Theres no Gameplay rofl\nCool lights tho ");
