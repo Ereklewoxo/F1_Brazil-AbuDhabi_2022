@@ -497,7 +497,6 @@ namespace F1_Brazil_GP_test
             string pos20;
             var lineupS = new List<string> { "LEC", "VER", "SAI", "PER", "HAM", "RUS", "ALO", "NOR", "OCO", "BOT", "RIC", "GAS", "MAG", "DEV", "TSU", "MSC", "ZHO", "VET", "ALB", "STR" };
             Random rnd = new Random();
-            bool lineupGened = false;
             do
             {
                 int startRnd = rnd.Next(24);
@@ -509,7 +508,10 @@ namespace F1_Brazil_GP_test
                         lineupS[0] = racerListS[1];
                     }
                     else
-                    { pole = racerList[0]; }
+                    { 
+                        pole = racerList[0];
+                        lineupS[0] = racerListS[0];
+                    }
                 }
                 else
                 {
@@ -683,7 +685,7 @@ namespace F1_Brazil_GP_test
                         pos13 = racerList[startRnd - 6];
                         lineupS[12] = racerListS[startRnd - 6];
                     }
-                } while (pole == pos13 || pos2 == pos13 || pos3 == pos13 || pos4 == pos13 || pos5 == pos13 || pos6 == pos13 || pos7 == pos13 || pos8 == pos13 || pos9 == pos13 || pos9 == pos13 || pos10 == pos13 || pos11 == pos13 || pos12 == pos13);
+                } while (pole == pos13 || pos2 == pos13 || pos3 == pos13 || pos4 == pos13 || pos5 == pos13 || pos6 == pos13 || pos7 == pos13 || pos8 == pos13 || pos9 == pos13 || pos10 == pos13 || pos11 == pos13 || pos12 == pos13);
                 do
                 {
                     startRnd = rnd.Next(24);
@@ -697,7 +699,7 @@ namespace F1_Brazil_GP_test
                         pos14 = racerList[startRnd - 5];
                         lineupS[13] = racerListS[startRnd - 5];
                     }
-                } while (pole == pos14 || pos2 == pos14 || pos3 == pos14 || pos4 == pos14 || pos5 == pos14 || pos6 == pos14 || pos7 == pos14 || pos8 == pos14 || pos9 == pos14 || pos9 == pos14 || pos10 == pos14 || pos11 == pos14 || pos12 == pos14 || pos13 == pos14);
+                } while (pole == pos14 || pos2 == pos14 || pos3 == pos14 || pos4 == pos14 || pos5 == pos14 || pos6 == pos14 || pos7 == pos14 || pos8 == pos14 || pos9 == pos14 || pos10 == pos14 || pos11 == pos14 || pos12 == pos14 || pos13 == pos14);
                 do
                 {
                     startRnd = rnd.Next(24);
@@ -711,7 +713,7 @@ namespace F1_Brazil_GP_test
                         pos15 = racerList[startRnd - 5];
                         lineupS[14] = racerListS[startRnd - 5];
                     }
-                } while (pole == pos15 || pos2 == pos15 || pos3 == pos15 || pos4 == pos15 || pos5 == pos15 || pos6 == pos15 || pos7 == pos15 || pos8 == pos15 || pos9 == pos15 || pos9 == pos15 || pos10 == pos15 || pos11 == pos15 || pos12 == pos15 || pos13 == pos15 || pos14 == pos15);
+                } while (pole == pos15 || pos2 == pos15 || pos3 == pos15 || pos4 == pos15 || pos5 == pos15 || pos6 == pos15 || pos7 == pos15 || pos8 == pos15 || pos9 == pos15 || pos10 == pos15 || pos11 == pos15 || pos12 == pos15 || pos13 == pos15 || pos14 == pos15);
                 do
                 {
                     startRnd = rnd.Next(24);
@@ -725,7 +727,7 @@ namespace F1_Brazil_GP_test
                         pos16 = racerList[startRnd - 5];
                         lineupS[15] = racerListS[startRnd - 5];
                     }
-                } while (pole == pos16 || pos2 == pos16 || pos3 == pos16 || pos4 == pos16 || pos5 == pos16 || pos6 == pos16 || pos7 == pos16 || pos8 == pos16 || pos9 == pos16 || pos9 == pos16 || pos10 == pos16 || pos11 == pos16 || pos12 == pos16 || pos13 == pos16 || pos14 == pos16 || pos15 == pos16);
+                } while (pole == pos16 || pos2 == pos16 || pos3 == pos16 || pos4 == pos16 || pos5 == pos16 || pos6 == pos16 || pos7 == pos16 || pos8 == pos16 || pos9 == pos16 || pos10 == pos16 || pos11 == pos16 || pos12 == pos16 || pos13 == pos16 || pos14 == pos16 || pos15 == pos16 );
                 do
                 {
                     startRnd = rnd.Next(24);
@@ -739,7 +741,7 @@ namespace F1_Brazil_GP_test
                         pos17 = racerList[startRnd - 5];
                         lineupS[16] = racerListS[startRnd - 5];
                     }
-                } while (pole == pos17 || pos2 == pos17 || pos3 == pos17 || pos4 == pos17 || pos5 == pos17 || pos6 == pos17 || pos7 == pos17 || pos8 == pos17 || pos9 == pos17 || pos9 == pos17 || pos10 == pos17 || pos11 == pos17 || pos12 == pos17 || pos13 == pos17 || pos14 == pos17 || pos15 == pos17 || pos16 == pos17);
+                } while (pole == pos17 || pos2 == pos17 || pos3 == pos17 || pos4 == pos17 || pos5 == pos17 || pos6 == pos17 || pos7 == pos17 || pos8 == pos17 || pos9 == pos17 || pos10 == pos17 || pos11 == pos17 || pos12 == pos17 || pos13 == pos17 || pos14 == pos17 || pos15 == pos17 || pos16 == pos17);
                 do
                 {
                     startRnd = rnd.Next(24);
@@ -753,7 +755,7 @@ namespace F1_Brazil_GP_test
                         pos18 = racerList[startRnd - 5];
                         lineupS[17] = racerListS[startRnd - 5];
                     }
-                } while (pole == pos18 || pos2 == pos18 || pos3 == pos18 || pos4 == pos18 || pos5 == pos18 || pos6 == pos18 || pos7 == pos18 || pos8 == pos18 || pos9 == pos18 || pos9 == pos18 || pos10 == pos18 || pos11 == pos18 || pos12 == pos18 || pos13 == pos18 || pos14 == pos18 || pos15 == pos18 || pos16 == pos18 || pos17 == pos18);
+                } while (pole == pos18 || pos2 == pos18 || pos3 == pos18 || pos4 == pos18 || pos5 == pos18 || pos6 == pos18 || pos7 == pos18 || pos8 == pos18 || pos9 == pos18 || pos10 == pos18 || pos11 == pos18 || pos12 == pos18 || pos13 == pos18 || pos14 == pos18 || pos15 == pos18 || pos16 == pos18 || pos17 == pos18 );
                 do
                 {
                     startRnd = rnd.Next(24);
@@ -767,15 +769,14 @@ namespace F1_Brazil_GP_test
                         pos19 = racerList[startRnd - 5];
                         lineupS[18] = racerListS[startRnd - 5];
                     }
-                } while (pole == pos19 || pos2 == pos19 || pos3 == pos19 || pos4 == pos19 || pos5 == pos19 || pos6 == pos19 || pos7 == pos19 || pos8 == pos19 || pos9 == pos19 || pos9 == pos19 || pos10 == pos19 || pos11 == pos19 || pos12 == pos19 || pos13 == pos19 || pos14 == pos18 || pos15 == pos19 || pos16 == pos19 || pos17 == pos19 || pos18 == pos19);
+                } while (pole == pos19 || pos2 == pos19 || pos3 == pos19 || pos4 == pos19 || pos5 == pos19 || pos6 == pos19 || pos7 == pos19 || pos8 == pos19 || pos9 == pos19 || pos10 == pos19 || pos11 == pos19 || pos12 == pos19 || pos13 == pos19 || pos14 == pos19 || pos15 == pos19 || pos16 == pos19 || pos17 == pos19 || pos18 == pos19 );
                 do
                 {
                     startRnd = rnd.Next(20);
                     pos20 = racerList[startRnd];
                     lineupS[19] = racerListS[startRnd];
-                } while (pole == pos20 || pos2 == pos20 || pos3 == pos20 || pos4 == pos20 || pos5 == pos20 || pos6 == pos20 || pos7 == pos20 || pos8 == pos20 || pos9 == pos20 || pos9 == pos20 || pos10 == pos20 || pos11 == pos20 || pos12 == pos20 || pos13 == pos20 || pos14 == pos20 || pos15 == pos20 || pos16 == pos20 || pos17 == pos20 || pos18 == pos20 || pos19 == pos20);
-                lineupGened = true;
-            } while (lineupS.Distinct().Count() == lineupS.Count() && lineupGened == false);
+                } while (pole == pos20 || pos2 == pos20 || pos3 == pos20 || pos4 == pos20 || pos5 == pos20 || pos6 == pos20 || pos7 == pos20 || pos8 == pos20 || pos9 == pos20 || pos10 == pos20 || pos11 == pos20 || pos12 == pos20 || pos13 == pos20 || pos14 == pos20 || pos15 == pos20 || pos16 == pos20 || pos17 == pos20 || pos18 == pos20 || pos19 == pos20);
+            } while (pole == pos2);
             var lineup = new List<string> { pole, pos2, pos3, pos4, pos5, pos6, pos7, pos8, pos9, pos10, pos11, pos12, pos13, pos14, pos15, pos16, pos17, pos18, pos19, pos20 };
             Console.WriteLine(lineup);
             int minute = 30;
