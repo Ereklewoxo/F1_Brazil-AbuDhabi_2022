@@ -81,10 +81,46 @@ namespace F1_Brazil_GP_test
                 Console.WriteLine($"For which team do you wish to play {userName}?");
                 foreach (string item in teamList)
                 {
+                    Console.ForegroundColor = ConsoleColor.White;
                     if (writeTeams + 1 == 10)
-                    { Console.WriteLine(0 + " - " + teamList[writeTeams]); }
+                    { 
+                        Console.Write(0 + " - " + teamList[writeTeams]);
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
                     else
-                    Console.WriteLine(writeTeams + 1 + " - " + teamList[writeTeams]);
+                    { Console.Write(writeTeams + 1 + " - " + teamList[writeTeams]);
+                        switch (teamList[writeTeams])
+                        {
+                            case "Mercedes":
+                                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                                break;
+                            case "Red Bull":
+                                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                                break;
+                            case "Ferrari":
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                break;
+                            case "McLaren":
+                                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                                break;
+                            case "Alpine":
+                                Console.ForegroundColor = ConsoleColor.Blue;
+                                break;
+                            case "AlphaTauri":
+                                Console.ForegroundColor = ConsoleColor.DarkGray;
+                                break;
+                            case "Aston Martin":
+                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                break;
+                            case "Williams":
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                break;
+                            case "Alfa Romeo":
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                break;
+                        }
+                    }
+                    Console.WriteLine("/");
                     writeTeams++;
                 }
                 userTeam = Console.ReadLine().ToLower();
@@ -493,7 +529,7 @@ namespace F1_Brazil_GP_test
                 int startRnd = rnd.Next(24);
                 if (startRnd - 18 < 0)
                 {
-                    if (startRnd > 9)
+                    if (startRnd > 14)
                     {
                         pole = racerList[1];
                         lineupS[0] = racerListS[1];
