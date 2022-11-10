@@ -10,10 +10,12 @@ namespace F1_Brazil_GP
     {
         static void Main(string[] args)
         {
+            Program program = new Program();
             var teamList = new List<string> { "Mercedes", "Red Bull", "Ferrari", "McLaren", "Alpine", "AlphaTauri", "Aston Martin", "Williams", "Alfa Romeo", "Haas" };
             var racerList = new List<string> { "Charles Leclerc", "Max Verstappen", "Carlos Sainz", "Sergio Perez", "Lewis Hamilton", "George Russell", "Fernando Alonso", "Lando Norris", "Esteban Ocon", "Valtteri Bottas", "Daniel Ricciardo", "Pierre Gasly", "Kevin Magnussen", "Nyck De Vries", "Yuki Tsunoda", "Mick Schumacher", "Zhou Guanyu", "Sebastian Vettel", "Alexander Albon", "Lance Stroll" };
             var racerListS = new List<string> { "LEC", "VER", "SAI", "PER", "HAM", "RUS", "ALO", "NOR", "OCO", "BOT", "RIC", "GAS", "MAG", "DEV", "TSU", "MSC", "ZHO", "VET", "ALB", "STR" };
             string userTeam = "Audi";
+            ConsoleKeyInfo key;
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
@@ -926,8 +928,11 @@ namespace F1_Brazil_GP
                         writeLineup++;
                     }
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.Write("Press any key to continue");
-                    Console.ReadKey();
+                    Console.Write("Press 'Enter' to continue");
+                    do
+                    {
+                        key = Console.ReadKey(true);
+                    } while (key.Key != ConsoleKey.Enter);
                     Console.Clear();
                 }
                 else if (preRace == ConsoleKey.D2)
@@ -942,8 +947,11 @@ namespace F1_Brazil_GP
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("For now this is just sim");
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.Write("Press any key to continue");
-                    Console.ReadKey();
+                    Console.Write("Press 'Enter' to continue");
+                    do
+                    {
+                        key = Console.ReadKey(true);
+                    } while (key.Key != ConsoleKey.Enter);
                     Console.Clear();
                 }
                 else if (preRace == ConsoleKey.D4)
@@ -1052,19 +1060,55 @@ namespace F1_Brazil_GP
             RedLights();
             Console.Clear();
             Console.WriteLine("It's lights out and away we go");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("Press 'Enter' to continue");
+            do
+            {
+                key = Console.ReadKey(true);
+            } while (key.Key != ConsoleKey.Enter);
+            Console.ForegroundColor = ConsoleColor.White;
             int VER = 0; int LEC = 0; int HAM = 0; int RUS = 0; int PER = 0; int SAI = 0; int STR = 0; int RIC = 0; int NOR = 0; int GAS = 0;
             int ZHO = 0; int BOT = 0; int ALB = 0; int MAG = 0; int DEV = 0; int MSC = 0; int TSU = 0; int ALO = 0; int OCO = 0; int VET = 0; int USER = 0;
             int VERp = 0; int LECp = 0; int HAMp = 0; int RUSp = 0; int PERp = 0; int SAIp = 0; int STRp = 0; int RICp = 0; int NORp = 0; int GASp = 0;
             int ZHOp = 0; int BOTp = 0; int ALBp = 0; int MAGp = 0; int DEVp = 0; int MSCp = 0; int TSUp = 0; int ALOp = 0; int OCOp = 0; int VETp = 0; int USERp = 0;
             //race
             int lapCount = 1;
+            int pitCount = 0;
+            int challengeCount = 1;
             int random;
-            for (int race = 0; race < 15; race++)
+            double randomDNF;
+            string userShort = userNameS;
+            for (int race = 0; race < 8; race++)
             {
+                Console.Clear();
+                int scoreLap1 = 0;
+                int scoreDRS = 0;
+                int scorePit = 0;
+                if (USER < 1000)
+                {
+                    random = rnd.Next(2);
+                    Console.WriteLine($"LAP {lapCount}/71");
+                    Console.Write($"Challenge {challengeCount} - ");
+                    if (race == 0)
+                    {
+                        scoreLap1 = program.MiniGameLap1();
+                    }
+                    else if (random == 1 && USERp != 1)
+                    {
+                        scoreDRS = program.MiniGameDRS();
+                    }
+                    else if (random == 0 && pitCount < 2 && race > 1)
+                    {
+                        pitCount++;
+                        scorePit = program.MiniGamePit();
+                    }
+                }
+                int score = scoreLap1 + scoreDRS + scorePit;
+                challengeCount++;
+                Console.Clear();
                 for (int i = 0; i < 1;)
                 {
-                    Console.ReadKey();
-                    for (int j = 0; j < 20; j++)
+                    for (int j = 0; j < lineupS.Count; j++)
                     {
                         if (lineupS[j] == "VER")
                         {
@@ -1072,6 +1116,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(27, 27 + (j + 1) * 15); }
                             else
                             { random = rnd.Next(27, 27 + (VERp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.002)
+                            { 
+                                random = (16 - race) * 1000 + random;
+                            }
                             VER = random;
                         }
                         else if (lineupS[j] == "LEC")
@@ -1080,6 +1129,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(33, 33 + (j + 1) * 15); }
                             else
                             { random = rnd.Next(33, 33 + (LECp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.003)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             LEC = random;
                         }
                         else if (lineupS[j] == "HAM")
@@ -1088,6 +1142,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(46, 46 + (j + 1) * 15); }
                             else
                             { random = rnd.Next(46, 46 + (HAMp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.001)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             HAM = random;
                         }
                         else if (lineupS[j] == "RUS")
@@ -1096,6 +1155,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(45, 45 + (j + 1) * 15); }
                             else
                             { random = rnd.Next(45, 45 + (RUSp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.001)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             RUS = random;
                         }
                         else if (lineupS[j] == "PER")
@@ -1104,6 +1168,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(38, 38 + (j + 1) * 15); }
                             else
                             { random = rnd.Next(38, 38 + (PERp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.003)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             PER = random;
                         }
                         else if (lineupS[j] == "SAI")
@@ -1112,6 +1181,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(35, 35 + (j + 1) * 15); }
                             else
                             { random = rnd.Next(35, 35 + (SAIp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.005)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             SAI = random;
                         }
                         else if (lineupS[j] == "NOR")
@@ -1120,6 +1194,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(78, 78 + (NORp + 1) * 15); }
                             else
                             { random = rnd.Next(78, 78 + (j + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.001)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             NOR = random;
                         }
                         else if (lineupS[j] == "RIC")
@@ -1128,6 +1207,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(117, 117 + (j + 1) * 15); }
                             else
                             { random = rnd.Next(117, 117 + (RICp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.002)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             RIC = random;
                         }
                         else if (lineupS[j] == "OCO")
@@ -1136,6 +1220,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(82, 82 + (j + 1) * 15); }
                             else
                             { random = rnd.Next(82, 82 + (OCOp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.002)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             OCO = random;
                         }
                         else if (lineupS[j] == "ALO")
@@ -1144,6 +1233,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(88, 88 + (j + 1) * 15); }
                             else
                             { random = rnd.Next(88, 88 + (ALOp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.005)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             ALO = random;
                         }
                         else if (lineupS[j] == "GAS")
@@ -1152,6 +1246,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(112, 112 + (GASp + 1) * 15); }
                             else
                             { random = rnd.Next(112, 112 + (j + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.005)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             GAS = random;
                         }
                         else if (lineupS[j] == "TSU")
@@ -1160,6 +1259,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(128, 128 + (j + 1) * 15); }
                             else
                             { random = rnd.Next(128, 128 + (TSUp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.007)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             TSU = random;
                         }
                         else if (lineupS[j] == "STR")
@@ -1168,6 +1272,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(117, 117 + (j + 1) * 15); }
                             else
                             { random = rnd.Next(117, 117 + (STRp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.003)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             STR = random;
                         }
                         else if (lineupS[j] == "VET")
@@ -1176,6 +1285,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(105, 105 + (j + 1) * 15); }
                             else
                             { random = rnd.Next(105, 105 + (VETp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.004)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             VET = random;
                         }
                         else if (lineupS[j] == "ALB")
@@ -1184,6 +1298,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(126, 126 + (j + 1) * 15); }
                             else
                             { random = rnd.Next(126, 126 + (ALBp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.004)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             ALB = random;
                         }
                         else if (lineupS[j] == "DEV")
@@ -1192,6 +1311,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(100, 100 + (j + 1) * 15); }
                             else
                             { random = rnd.Next(100, 100 + (DEVp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.004)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             DEV = random;
                         }
                         else if (lineupS[j] == "BOT")
@@ -1200,6 +1324,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(102, 102 + (j + 1) * 15); }
                             else
                             { random = rnd.Next(102, 102 + (BOTp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.005)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             BOT = random;
                         }
                         else if (lineupS[j] == "ZHO")
@@ -1208,6 +1337,11 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(130, 130 + (j + 1) * 15); }
                             else
                             { random = rnd.Next(130, 130 + (ZHOp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.006)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             ZHO = random;
                         }
                         else if (lineupS[j] == "MAG")
@@ -1216,23 +1350,37 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(129, 129 + (j + 1) * 15); }
                             else
                             { random = rnd.Next(129, 129 + (MAGp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.004)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             MAG = random;
                         }
                         else if (lineupS[j] == "MSC")
                         {
                             if (lapCount == 1)
-                            { random = rnd.Next(135, 136 + (j + 1) * 15); }
+                            { random = rnd.Next(135, 135 + (j + 1) * 15); }
                             else
-                            { random = rnd.Next(135, 136 + (MSCp + 1) * 15); }
+                            { random = rnd.Next(135, 135 + (MSCp + 1) * 15); }
+                            randomDNF = rnd.NextDouble();
+                            if (randomDNF < 0.002)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             MSC = random;
                         }
                         //user input here
                         else if (lineupS[j] == userNameS)
                         {
                             if (lapCount == 1)
-                            { random = rnd.Next(1, 5 + (j + 1) * 15); }
+                            { random = rnd.Next(score, score + (j + 1) * 15); }
                             else
-                            { random = rnd.Next(200, 200 + (USERp + 1) * 15); }
+                            { random = rnd.Next(score, score + (USERp + 1) * 15); }
+                            if (score > 1000)
+                            {
+                                random = (16 - race) * 1000 + random;
+                            }
                             USER = random;
                         }
                     }
@@ -1245,7 +1393,97 @@ namespace F1_Brazil_GP
                 var lap = new List<int> { VER, LEC, HAM, RUS, PER, SAI, STR, RIC, NOR, GAS, ZHO, BOT, ALB, MAG, DEV, MSC, TSU, ALO, OCO, VET, USER };
                 lap.Sort();
                 lap.RemoveAt(0);
-                for (int i = 0; i < 20; i++)
+                for (int i = 0; i < lap.Count; i++)
+                { 
+                    if (lap[i] > 1000)
+                    {
+                        if (lap[i] == VER)
+                        {
+                            lineupS.Remove("VER");
+                        }
+                        else if (lap[i] == LEC)
+                        {
+                            lineupS.Remove("LEC");
+                        }
+                        else if (lap[i] == HAM)
+                        {
+                            lineupS.Remove("HAM");
+                        }
+                        else if (lap[i] == RUS)
+                        {
+                            lineupS.Remove("RUS");
+                        }
+                        else if (lap[i] == PER)
+                        {
+                            lineupS.Remove("PER");
+                        }
+                        else if (lap[i] == SAI)
+                        {
+                            lineupS.Remove("SAI");
+                        }
+                        else if (lap[i] == NOR)
+                        {
+                            lineupS.Remove("NOR");
+                        }
+                        else if (lap[i] == RIC)
+                        {
+                            lineupS.Remove("RIC");
+                        }
+                        else if (lap[i] == OCO)
+                        {
+                            lineupS.Remove("OCO");
+                        }
+                        else if (lap[i] == ALO)
+                        {
+                            lineupS.Remove("ALO");
+                        }
+                        else if (lap[i] == GAS)
+                        {
+                            lineupS.Remove("GAS");
+                        }
+                        else if (lap[i] == TSU)
+                        {
+                            lineupS.Remove("TSU");
+                        }
+                        else if (lap[i] == STR)
+                        {
+                            lineupS.Remove("STR");
+                        }
+                        else if (lap[i] == VET)
+                        {
+                            lineupS.Remove("VET");
+                        }
+                        else if (lap[i] == ALB)
+                        {
+                            lineupS.Remove("ALB");
+                        }
+                        else if (lap[i] == DEV)
+                        {
+                            lineupS.Remove("DEV");
+                        }
+                        else if (lap[i] == BOT)
+                        {
+                            lineupS.Remove("BOT");
+                        }
+                        else if (lap[i] == ZHO)
+                        {
+                            lineupS.Remove("ZHO");
+                        }
+                        else if (lap[i] == MAG)
+                        {
+                            lineupS.Remove("MAG");
+                        }
+                        else if (lap[i] == MSC)
+                        {
+                            lineupS.Remove("MSC");
+                        }
+                        else if (lap[i] == USER)
+                        {
+                            lineupS.Remove(userNameS);
+                        }
+                    }
+                }
+                for (int i = 0; i < lap.Count; i++)
                 {
                     if (lap[i] == VER)
                     {
@@ -1332,12 +1570,13 @@ namespace F1_Brazil_GP
                         USERp = i;
                     }
                 }
-                Console.ReadLine();
-                Console.Clear();
+                { Console.ForegroundColor = ConsoleColor.White; }
                 Console.WriteLine($"LAP {lapCount}/71");
-                lapCount += 5;
+                lapCount += 10;
                 for (int i = 0; i < 20; i++)
                 {
+                    if (i <10)
+                    { Console.ForegroundColor = ConsoleColor.Yellow; }
                     if (i < 9)
                     { Console.Write(" " + (i + 1)); }
                     else
@@ -1423,6 +1662,8 @@ namespace F1_Brazil_GP
                     }
                     { Console.Write(" |"); }
                     Console.ForegroundColor = ConsoleColor.White;
+                    if (lap[i] > 1000)
+                    { Console.ForegroundColor = ConsoleColor.DarkGray; }
                     if (lap[i] == VER)
                     { Console.WriteLine(" VER"); }
                     else if (lap[i] == PER)
@@ -1464,8 +1705,16 @@ namespace F1_Brazil_GP
                     else if (lap[i] == MSC)
                     { Console.WriteLine(" MSC"); }
                     else if (lap[i] == USER)
-                    { Console.WriteLine($" {userNameS}"); }
+                    { Console.WriteLine($" {userShort}"); }
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("Press 'Enter' to continue");
+                do
+                {
+                    key = Console.ReadKey(true);
+                } while (key.Key != ConsoleKey.Enter);
+                Console.ForegroundColor = ConsoleColor.White;
             }
         }
         public static void F1Logo()
@@ -1711,6 +1960,7 @@ namespace F1_Brazil_GP
         }
         public static void RedLights()
         {
+            Console.CursorVisible = false;
             Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(0, Console.CursorTop - 21);
             Console.Write("\r      ·····");
@@ -1729,23 +1979,115 @@ namespace F1_Brazil_GP
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("\r      ·····");
             Task.Delay(1000).Wait();
+            Console.CursorVisible = true;
         }
-        public static void MiniGame1()
+        public int MiniGameLap1()
         {
-            //minigames idea 1, turning on DRS
-            Random rnd = new Random();
+            int score;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Reset();
             Console.ForegroundColor = ConsoleColor.White;
-            int miniGame = rnd.Next(3000, 9000);
-            Console.WriteLine("Press 'D' when DRS turns green\nDon't press it while it's gray!\nYour goal is 300ms or less");
-            Console.ReadKey();
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.Write("\n      DRS");
+            Console.Write("Five");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write(" Red ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Lights");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("Press 'W' as soon as the red lights go out\nYour goal is 200ms or less");
+            ConsoleKeyInfo key;
+            do
+            {
+                key = Console.ReadKey(true);
+            } while (key.Key != ConsoleKey.Enter);
+            Console.CursorVisible = false;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("\n\n\r        ·····");
+            Task.Delay(1000).Wait();
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write("\r        ·");
+            Task.Delay(1000).Wait();
+            Console.Write("\r        ··");
+            Task.Delay(1000).Wait();
+            Console.Write("\r        ···");
+            Task.Delay(1000).Wait();
+            Console.Write("\r        ····");
+            Task.Delay(1000).Wait();
+            Console.Write("\r        ·····");
+            Task.Delay(1002).Wait();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("\r        ·····");
+            Console.ForegroundColor = ConsoleColor.Black;
+            stopwatch.Start();
+            var keyPressed = Console.ReadKey().Key;
+            if (keyPressed == ConsoleKey.W)
+            {
+                stopwatch.Stop();
+            }
+            Task.Delay(1000).Wait();
+            if (stopwatch.IsRunning)
+            {
+                stopwatch.Stop();
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("\n");
+            Console.CursorVisible = true;
+            if (stopwatch.ElapsedMilliseconds < 3 && keyPressed == ConsoleKey.W)
+            {
+                Console.WriteLine($"False Start, you've been penalised with a five second penalty");
+                score = 500;
+            }
+            else if (stopwatch.ElapsedMilliseconds < 201 && keyPressed == ConsoleKey.W)
+            {
+                Console.Write("Your time was ");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{stopwatch.ElapsedMilliseconds}ms");
+                score = Convert.ToInt32(stopwatch.ElapsedMilliseconds / 5);
+            }
+            else if (stopwatch.ElapsedMilliseconds > 200 && keyPressed == ConsoleKey.W)
+            {
+                Console.Write("Your time was ");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine($"{stopwatch.ElapsedMilliseconds}ms");
+                score = Convert.ToInt32(stopwatch.ElapsedMilliseconds / 2);
+                if (score > 680) { score = 650; }
+            }
+            else
+            {
+                Console.WriteLine($"You pressed the wrong button, specifically '{keyPressed}'");
+                score = 650;
+            }
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("Press 'Enter' to continue");
+            Console.ForegroundColor = ConsoleColor.Black;
+            do
+            {
+                key = Console.ReadKey(true);
+            } while (key.Key != ConsoleKey.Enter);
+            return score;
+        }
+        public int MiniGameDRS()
+        {
+            int score;
+            Random rnd = new Random();
+            Stopwatch stopwatch = new Stopwatch();
+            Console.ForegroundColor = ConsoleColor.White;
+            int miniGameDRS = rnd.Next(3000, 9000);
+            Console.Write("Turning On");
             Console.ForegroundColor = ConsoleColor.Green;
-            Task.Delay(miniGame).Wait();
-            Console.Write("\r      DRS");
+            Console.WriteLine(" DRS");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("Press 'D' only when DRS turns green\nYour goal is 300ms or less");
+            ConsoleKeyInfo key;
+            do
+            {
+                key = Console.ReadKey(true);
+            } while (key.Key != ConsoleKey.Enter);
+            Console.CursorVisible = false;
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write("\n\n        DRS");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Task.Delay(miniGameDRS).Wait();
+            Console.WriteLine("\r        DRS");
             Console.ForegroundColor = ConsoleColor.Black;
             stopwatch.Start();
             var keyPressed = Console.ReadKey().Key;
@@ -1754,36 +2096,103 @@ namespace F1_Brazil_GP
                 stopwatch.Stop();
             }
             Task.Delay(800).Wait();
-            Console.Clear();
+            Console.CursorVisible = true;
             if (stopwatch.IsRunning)
             {
                 stopwatch.Stop();
             }
             Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
             if (stopwatch.ElapsedMilliseconds < 3 && keyPressed == ConsoleKey.D)
             {
                 Console.WriteLine($"'D' was pressed at a wrong time");
+                score = 500;
             }
             else if (stopwatch.ElapsedMilliseconds < 301 && keyPressed == ConsoleKey.D)
             {
                 Console.Write("Your time was ");
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"{stopwatch.ElapsedMilliseconds}ms");
+                score = Convert.ToInt32(stopwatch.ElapsedMilliseconds / 10);
             }
             else if (stopwatch.ElapsedMilliseconds > 300 && keyPressed == ConsoleKey.D)
             {
                 Console.Write("Your time was ");
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine($"{stopwatch.ElapsedMilliseconds}ms");
+                score = Convert.ToInt32(stopwatch.ElapsedMilliseconds / 4);
             }
             else
             {
                 Console.WriteLine($"You pressed the wrong button, specifically '{keyPressed}'");
+                score =  Convert.ToInt32(stopwatch.ElapsedMilliseconds);
             }
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("Press 'Enter' to continue");
-            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Write("Press 'Enter' to continue");
+            do
+            {
+                key = Console.ReadKey(true);
+            } while (key.Key != ConsoleKey.Enter);
+            return score;
+        }
+        public int MiniGamePit()
+        {
+            Console.WriteLine("Box, box");
             Console.ReadLine();
+            ConsoleKeyInfo key;
+            Random rnd = new Random();
+            int badPitRnd = rnd.Next(33);
+            int miniGamePit;
+            if (badPitRnd == 0)
+            {
+                miniGamePit = rnd.Next(4100, 12000);
+            }
+            else 
+            {
+                miniGamePit = rnd.Next(2000, 4100);
+            }
+            Stopwatch stopwatch = new Stopwatch();
+            Console.CursorVisible = false;
+            stopwatch.Start();
+            while (stopwatch.ElapsedMilliseconds < miniGamePit)
+            {
+                if (stopwatch.Elapsed.Seconds < 2.5)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                else if (stopwatch.Elapsed.Seconds < 3.5)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                }
+                else if (stopwatch.Elapsed.Seconds < 5)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                }
+                else if (stopwatch.Elapsed.Seconds < 8)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+                else if (stopwatch.Elapsed.Seconds < 11)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                }
+                else if (stopwatch.Elapsed.Seconds < 12)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                }
+                Console.Write("Stop Time " + stopwatch.Elapsed.Seconds.ToString() + "." + stopwatch.Elapsed.Milliseconds);
+                Console.Write('\r');
+            }
+            stopwatch.Stop();
+            Console.CursorVisible = true;
+            int score = Convert.ToInt32(stopwatch.ElapsedMilliseconds/45);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("\nPress 'Enter' to continue");
+            do
+            {
+                key = Console.ReadKey(true);
+            } while (key.Key != ConsoleKey.Enter);
+            return score;
         }
     }
 }
