@@ -2661,10 +2661,15 @@ namespace F1_Brazil_GP
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("\n\nYou made a mistake");
             }
-            else
+            else if (stopwatch.Elapsed.Seconds < 12)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\n" + stopwatch.Elapsed.Seconds + "." + stopwatch.Elapsed.Milliseconds); ;
+                Console.WriteLine("\n1.1" + (stopwatch.Elapsed.Seconds - 2) + "." + stopwatch.Elapsed.Milliseconds); ;
+            }
+            else if (stopwatch.Elapsed.Seconds < 102)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\n1." + (stopwatch.Elapsed.Seconds - 2) + "." + stopwatch.Elapsed.Milliseconds); ;
             }
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.Write("Press 'Enter' to continue");
