@@ -16,6 +16,7 @@ namespace F1_Brazil_GP
             var racerListS = new List<string> { "LEC", "VER", "SAI", "PER", "HAM", "RUS", "ALO", "NOR", "OCO", "BOT", "RIC", "GAS", "MAG", "DEV", "TSU", "MSC", "ZHO", "VET", "ALB", "STR" };
             string userTeam = "Audi";
             ConsoleKeyInfo key;
+            program.MiniGameFL();
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
@@ -927,7 +928,7 @@ namespace F1_Brazil_GP
                         }
                         writeLineup++;
                     }
-                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.Write("Press 'Enter' to continue");
                     do
                     {
@@ -946,7 +947,7 @@ namespace F1_Brazil_GP
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("For now this is just sim");
-                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.Write("Press 'Enter' to continue");
                     do
                     {
@@ -1060,7 +1061,7 @@ namespace F1_Brazil_GP
             RedLights();
             Console.Clear();
             Console.WriteLine("It's lights out and away we go");
-            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.Write("Press 'Enter' to continue");
             do
             {
@@ -1072,6 +1073,7 @@ namespace F1_Brazil_GP
             int VERp = 0; int LECp = 0; int HAMp = 0; int RUSp = 0; int PERp = 0; int SAIp = 0; int STRp = 0; int RICp = 0; int NORp = 0; int GASp = 0;
             int ZHOp = 0; int BOTp = 0; int ALBp = 0; int MAGp = 0; int DEVp = 0; int MSCp = 0; int TSUp = 0; int ALOp = 0; int OCOp = 0; int VETp = 0; int USERp = 0;
             //race
+            var lap = new List<int>();
             int lapCount = 1;
             int pitCount = 0;
             int challengeCount = 1;
@@ -1384,13 +1386,12 @@ namespace F1_Brazil_GP
                             USER = random;
                         }
                     }
-                    var lap0 = new List<int> { VER, LEC, HAM, RUS, PER, SAI, STR, RIC, NOR, GAS, ZHO, BOT, ALB, MAG, DEV, MSC, TSU, ALO, OCO, VET, USER };
-                    if (lap0.Count() == lap0.Distinct().Count())
+                    lap = new List<int> { VER, LEC, HAM, RUS, PER, SAI, STR, RIC, NOR, GAS, ZHO, BOT, ALB, MAG, DEV, MSC, TSU, ALO, OCO, VET, USER };
+                    if (lap.Count() == lap.Distinct().Count())
                     {
                         i++;
                     }
                 }
-                var lap = new List<int> { VER, LEC, HAM, RUS, PER, SAI, STR, RIC, NOR, GAS, ZHO, BOT, ALB, MAG, DEV, MSC, TSU, ALO, OCO, VET, USER };
                 lap.Sort();
                 lap.RemoveAt(0);
                 for (int i = 0; i < lap.Count; i++)
@@ -1743,23 +1744,29 @@ namespace F1_Brazil_GP
                           "\n        F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1\n");
             for (int i = 0; i < 1;)
             {
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("Length - 4.31KM");
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.Write("  Lap record");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine(" - 1.10.540 V. Bottas (2018)");
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.Write("\n■ ");
+                Console.Write("■ ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("- Sector 1");
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                Console.Write("   ■ ");
+                Console.Write("  ■ ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("- Sector 2");
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.Write("   ■ ");
+                Console.Write("  ■ ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("- Sector 3");
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write("   DRS ");
+                Console.Write("  DRS ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Zones - 2");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.Write("Or press 'Enter' to continue");
                 Console.ForegroundColor = ConsoleColor.Black;
                 var keyPressed = Console.ReadKey().Key;
@@ -2056,7 +2063,7 @@ namespace F1_Brazil_GP
                 Console.WriteLine($"You pressed the wrong button, specifically '{keyPressed}'");
                 score = 650;
             }
-            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.Write("Press 'Enter' to continue");
             Console.ForegroundColor = ConsoleColor.Black;
             do
@@ -2127,7 +2134,7 @@ namespace F1_Brazil_GP
                 Console.WriteLine($"You pressed the wrong button, specifically '{keyPressed}'");
                 score =  Convert.ToInt32(stopwatch.ElapsedMilliseconds);
             }
-            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.Write("Press 'Enter' to continue");
             do
             {
@@ -2186,13 +2193,486 @@ namespace F1_Brazil_GP
             stopwatch.Stop();
             Console.CursorVisible = true;
             int score = Convert.ToInt32(stopwatch.ElapsedMilliseconds/45);
-            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.Write("\nPress 'Enter' to continue");
             do
             {
                 key = Console.ReadKey(true);
             } while (key.Key != ConsoleKey.Enter);
             return score;
+        }
+        public int MiniGameFL()
+        {
+            int score;
+            int lives = 3;
+            Stopwatch stopwatch = new Stopwatch();
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("Fastest Lap");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("You have the chance to set the fastest lap\nPress the keys in the right order");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("♦ ♦ ♦");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write(" - You're allowed 3 mistakes, < > - These represent arrow keys");
+            ConsoleKeyInfo key;
+            do
+            {
+                key = Console.ReadKey(true);
+            } while (key.Key != ConsoleKey.Enter);
+            Console.CursorVisible = false;
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("\r♦ ♦ ♦                                                                \n");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write("< > < D < < > > > < > < < < < D <");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            stopwatch.Start();
+            while (stopwatch.IsRunning)
+            {
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key != ConsoleKey.LeftArrow) { lives -= 1; }
+                    if ( lives < 3)
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        switch (lives)
+                        { 
+                            case 2:
+                                Console.WriteLine("\r♦ ♦  \n");
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("\r♦    \n");
+                                break;
+                            case 0:
+                                Console.WriteLine("\r     \n");
+                                break;
+                        }
+                    }
+                    if (lives == 0) { break; }
+                } while (key.Key != ConsoleKey.LeftArrow);
+                if (lives == 0) { break; }
+                Console.Write("\r<");
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key != ConsoleKey.RightArrow) { lives -= 1; }
+                    if (lives < 3)
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        switch (lives)
+                        {
+                            case 2:
+                                Console.WriteLine("\r♦ ♦  \n");
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("\r♦    \n");
+                                break;
+                            case 0:
+                                Console.WriteLine("\r     \n");
+                                break;
+                        }
+                    }
+                    if (lives == 0) { break; }
+                } while (key.Key != ConsoleKey.RightArrow);
+                if (lives == 0) { break; }
+                Console.Write("\r< >");
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key != ConsoleKey.LeftArrow) { lives -= 1; }
+                    if (lives < 3)
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        switch (lives)
+                        {
+                            case 2:
+                                Console.WriteLine("\r♦ ♦  \n");
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("\r♦    \n");
+                                break;
+                            case 0:
+                                Console.WriteLine("\r     \n");
+                                break;
+                        }
+                    }
+                    if (lives == 0) { break; }
+                } while (key.Key != ConsoleKey.LeftArrow);
+                if (lives == 0) { break; }
+                Console.Write("\r< > <");
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key != ConsoleKey.D) { lives -= 1; }
+                    if (lives < 3)
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        switch (lives)
+                        {
+                            case 2:
+                                Console.WriteLine("\r♦ ♦  \n");
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("\r♦    \n");
+                                break;
+                            case 0:
+                                Console.WriteLine("\r     \n");
+                                break;
+                        }
+                    }
+                    if (lives == 0) { break; }
+                } while (key.Key != ConsoleKey.D);
+                if (lives == 0) { break; }
+                Console.Write("\r< > < D");
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key != ConsoleKey.LeftArrow) { lives -= 1; }
+                    if (lives < 3)
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        switch (lives)
+                        {
+                            case 2:
+                                Console.WriteLine("\r♦ ♦  \n");
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("\r♦    \n");
+                                break;
+                            case 0:
+                                Console.WriteLine("\r     \n");
+                                break;
+                        }
+                    }
+                    if (lives == 0) { break; }
+                } while (key.Key != ConsoleKey.LeftArrow);
+                if (lives == 0) { break; }
+                Console.Write("\r< > < D <");
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key != ConsoleKey.LeftArrow) { lives -= 1; }
+                    if (lives < 3)
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        switch (lives)
+                        {
+                            case 2:
+                                Console.WriteLine("\r♦ ♦  \n");
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("\r♦    \n");
+                                break;
+                            case 0:
+                                Console.WriteLine("\r     \n");
+                                break;
+                        }
+                    }
+                    if (lives == 0) { break; }
+                } while (key.Key != ConsoleKey.LeftArrow);
+                if (lives == 0) { break; }
+                Console.Write("\r< > < D < <");
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key != ConsoleKey.RightArrow) { lives -= 1; }
+                    if (lives < 3)
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        switch (lives)
+                        {
+                            case 2:
+                                Console.WriteLine("\r♦ ♦  \n");
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("\r♦    \n");
+                                break;
+                            case 0:
+                                Console.WriteLine("\r     \n");
+                                break;
+                        }
+                    }
+                    if (lives == 0) { break; }
+                } while (key.Key != ConsoleKey.RightArrow);
+                if (lives == 0) { break; }
+                Console.Write("\r< > < D < < >");
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key != ConsoleKey.RightArrow) { lives -= 1; }
+                    if (lives < 3)
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        switch (lives)
+                        {
+                            case 2:
+                                Console.WriteLine("\r♦ ♦  \n");
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("\r♦    \n");
+                                break;
+                            case 0:
+                                Console.WriteLine("\r     \n");
+                                break;
+                        }
+                    }
+                    if (lives == 0) { break; }
+                } while (key.Key != ConsoleKey.RightArrow);
+                if (lives == 0) { break; }
+                Console.Write("\r< > < D < < > >");
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key != ConsoleKey.RightArrow) { lives -= 1; }
+                    if (lives < 3)
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        switch (lives)
+                        {
+                            case 2:
+                                Console.WriteLine("\r♦ ♦  \n");
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("\r♦    \n");
+                                break;
+                            case 0:
+                                Console.WriteLine("\r     \n");
+                                break;
+                        }
+                    }
+                    if (lives == 0) { break; }
+                } while (key.Key != ConsoleKey.RightArrow);
+                if (lives == 0) { break; }
+                Console.Write("\r< > < D < < > > >");
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key != ConsoleKey.LeftArrow) { lives -= 1; }
+                    if (lives < 3)
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        switch (lives)
+                        {
+                            case 2:
+                                Console.WriteLine("\r♦ ♦  \n");
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("\r♦    \n");
+                                break;
+                            case 0:
+                                Console.WriteLine("\r     \n");
+                                break;
+                        }
+                    }
+                    if (lives == 0) { break; }
+                } while (key.Key != ConsoleKey.LeftArrow);
+                if (lives == 0) { break; }
+                Console.Write("\r< > < D < < > > > <");
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key != ConsoleKey.RightArrow) { lives -= 1; }
+                    if (lives < 3)
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        switch (lives)
+                        {
+                            case 2:
+                                Console.WriteLine("\r♦ ♦  \n");
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("\r♦    \n");
+                                break;
+                            case 0:
+                                Console.WriteLine("\r     \n");
+                                break;
+                        }
+                    }
+                    if (lives == 0) { break; }
+                } while (key.Key != ConsoleKey.RightArrow);
+                if (lives == 0) { break; }
+                Console.Write("\r< > < D < < > > > < >");
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key != ConsoleKey.LeftArrow) { lives -= 1; }
+                    if (lives < 3)
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        switch (lives)
+                        {
+                            case 2:
+                                Console.WriteLine("\r♦ ♦  \n");
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("\r♦    \n");
+                                break;
+                            case 0:
+                                Console.WriteLine("\r     \n");
+                                break;
+                        }
+                    }
+                    if (lives == 0) { break; }
+                } while (key.Key != ConsoleKey.LeftArrow);
+                if (lives == 0) { break; }
+                Console.Write("\r< > < D < < > > > < > <");
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key != ConsoleKey.LeftArrow) { lives -= 1; }
+                    if (lives < 3)
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        switch (lives)
+                        {
+                            case 2:
+                                Console.WriteLine("\r♦ ♦  \n");
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("\r♦    \n");
+                                break;
+                            case 0:
+                                Console.WriteLine("\r     \n");
+                                break;
+                        }
+                    }
+                    if (lives == 0) { break; }
+                } while (key.Key != ConsoleKey.LeftArrow);
+                if (lives == 0) { break; }
+                Console.Write("\r< > < D < < > > > < > < <");
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key != ConsoleKey.LeftArrow) { lives -= 1; }
+                    if (lives < 3)
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        switch (lives)
+                        {
+                            case 2:
+                                Console.WriteLine("\r♦ ♦  \n");
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("\r♦    \n");
+                                break;
+                            case 0:
+                                Console.WriteLine("\r     \n");
+                                break;
+                        }
+                    }
+                    if (lives == 0) { break; }
+                } while (key.Key != ConsoleKey.LeftArrow);
+                if (lives == 0) { break; }
+                Console.Write("\r< > < D < < > > > < > < < <");
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key != ConsoleKey.LeftArrow) { lives -= 1; }
+                    if (lives < 3)
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        switch (lives)
+                        {
+                            case 2:
+                                Console.WriteLine("\r♦ ♦  \n");
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("\r♦    \n");
+                                break;
+                            case 0:
+                                Console.WriteLine("\r     \n");
+                                break;
+                        }
+                    }
+                    if (lives == 0) { break; }
+                } while (key.Key != ConsoleKey.LeftArrow);
+                if (lives == 0) { break; }
+                Console.Write("\r< > < D < < > > > < > < < < <");
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key != ConsoleKey.D) { lives -= 1; }
+                    if (lives < 3)
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        switch (lives)
+                        {
+                            case 2:
+                                Console.WriteLine("\r♦ ♦  \n");
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("\r♦    \n");
+                                break;
+                            case 0:
+                                Console.WriteLine("\r     \n");
+                                break;
+                        }
+                    }
+                    if (lives == 0) { break; }
+                } while (key.Key != ConsoleKey.D);
+                if (lives == 0) { break; }
+                Console.Write("\r< > < D < < > > > < > < < < < D");
+                do
+                {
+                    key = Console.ReadKey(true);
+                    if (key.Key != ConsoleKey.LeftArrow) { lives -= 1; }
+                    if (lives < 3)
+                    {
+                        Console.SetCursorPosition(0, Console.CursorTop - 2);
+                        switch (lives)
+                        {
+                            case 2:
+                                Console.WriteLine("\r♦ ♦  \n");
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine("\r♦    \n");
+                                break;
+                            case 0:
+                                Console.WriteLine("\r     \n");
+                                break;
+                        }
+                    }
+                    if (lives == 0) { break; }
+                } while (key.Key != ConsoleKey.LeftArrow);
+                if (lives == 0) { break; }
+                stopwatch.Stop();
+                Console.WriteLine("\r< > < D < < > > > < > < < < < D <");
+            }
+            Console.CursorVisible = true;
+            if (lives == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("\n\nYou made a mistake");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\n" + stopwatch.Elapsed.Seconds + "." + stopwatch.Elapsed.Milliseconds); ;
+            }
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write("Press 'Enter' to continue");
+            do
+            {
+                key = Console.ReadKey(true);
+            } while (key.Key != ConsoleKey.Enter);
+            return 0;
         }
     }
 }
