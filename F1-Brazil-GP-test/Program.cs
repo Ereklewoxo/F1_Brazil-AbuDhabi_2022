@@ -16,12 +16,9 @@ namespace F1_Brazil_GP
             var racerListS = new List<string> { "LEC", "VER", "SAI", "PER", "HAM", "RUS", "ALO", "NOR", "OCO", "BOT", "RIC", "GAS", "MAG", "DEV", "TSU", "MSC", "ZHO", "VET", "ALB", "STR" };
             string userTeam = "Audi";
             ConsoleKeyInfo key;
-            program.MiniGameFL();
-            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
             F1Logo();
-            Console.WriteLine("  /BRAZIL 2022 GP/");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("\nWhat's your first name?");
             string userFirstName = Console.ReadLine();
@@ -1078,34 +1075,42 @@ namespace F1_Brazil_GP
             int pitCount = 0;
             int challengeCount = 1;
             int random;
+            bool flPlayed = false;
             double randomDNF;
             string userShort = userNameS;
             for (int race = 0; race < 8; race++)
             {
                 Console.Clear();
-                int scoreLap1 = 0;
-                int scoreDRS = 0;
-                int scorePit = 0;
+                int score = 0;
                 if (USER < 1000)
                 {
-                    random = rnd.Next(2);
+                    random = rnd.Next(3);
                     Console.WriteLine($"LAP {lapCount}/71");
                     Console.Write($"Challenge {challengeCount} - ");
                     if (race == 0)
                     {
-                        scoreLap1 = program.MiniGameLap1();
+                        score = program.MiniGameLap1();
                     }
                     else if (random == 1 && USERp != 1)
                     {
-                        scoreDRS = program.MiniGameDRS();
+                        score = program.MiniGameDRS();
                     }
                     else if (random == 0 && pitCount < 2 && race > 1)
                     {
                         pitCount++;
-                        scorePit = program.MiniGamePit();
+                        score = program.MiniGamePit();
+                    }
+                    else if (random == 2 && flPlayed == false)
+                    {
+                        score = program.MiniGameFL();
+                        flPlayed = true;
+                    }
+                    else
+                    {
+                        program.MiniGameGear();
+                        score = program.MiniGameGear1();
                     }
                 }
-                int score = scoreLap1 + scoreDRS + scorePit;
                 challengeCount++;
                 Console.Clear();
                 for (int i = 0; i < 1;)
@@ -1720,11 +1725,16 @@ namespace F1_Brazil_GP
         }
         public static void F1Logo()
         {
-            Console.WriteLine("     ______________  __" +
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write(    "     ______________  __" +
                             "\n   /  ____________//  /" +
                             "\n  /  /  _________//  /" +
                             "\n /__/__/         /__/" +
-                            "\n");
+                            "\n\n   |");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("BRAZIL 2022 GP");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("|");
         }
         public static void Map()
         {
@@ -1744,11 +1754,11 @@ namespace F1_Brazil_GP
                           "\n        F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1\n");
             for (int i = 0; i < 1;)
             {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("Length - 4.31KM");
-                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.Write("  Lap record");
-                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine(" - 1.10.540 V. Bottas (2018)");
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.Write("■ ");
@@ -2078,7 +2088,7 @@ namespace F1_Brazil_GP
             Random rnd = new Random();
             Stopwatch stopwatch = new Stopwatch();
             Console.ForegroundColor = ConsoleColor.White;
-            int miniGameDRS = rnd.Next(3000, 9000);
+            int miniGameDRS = rnd.Next(2860, 8650);
             Console.Write("Turning On");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(" DRS");
@@ -2122,12 +2132,19 @@ namespace F1_Brazil_GP
                 Console.WriteLine($"{stopwatch.ElapsedMilliseconds}ms");
                 score = Convert.ToInt32(stopwatch.ElapsedMilliseconds / 10);
             }
-            else if (stopwatch.ElapsedMilliseconds > 300 && keyPressed == ConsoleKey.D)
+            else if (stopwatch.ElapsedMilliseconds < 401 && keyPressed == ConsoleKey.D)
             {
                 Console.Write("Your time was ");
-                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine($"{stopwatch.ElapsedMilliseconds}ms");
-                score = Convert.ToInt32(stopwatch.ElapsedMilliseconds / 4);
+                score = Convert.ToInt32(stopwatch.ElapsedMilliseconds / 5);
+            }
+            else if (stopwatch.ElapsedMilliseconds > 400 && keyPressed == ConsoleKey.D)
+            {
+                Console.Write("Your time was ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"{stopwatch.ElapsedMilliseconds}ms");
+                score = Convert.ToInt32(stopwatch.ElapsedMilliseconds / 3);
             }
             else
             {
@@ -2655,42 +2672,1003 @@ namespace F1_Brazil_GP
                 stopwatch.Stop();
                 Console.WriteLine("\r< > < D < < > > > < > < < < < D <");
             }
+            if (stopwatch.IsRunning) { stopwatch.Stop(); }
             Console.CursorVisible = true;
             if (lives == 0)
             {
                 Console.WriteLine("\n\nYou got too cocky");
+                score = Convert.ToInt32(stopwatch.Elapsed.Milliseconds * 2.5);
             }
             else if (stopwatch.ElapsedMilliseconds < 2540)
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 if (stopwatch.Elapsed.Seconds < 2)
-                { Console.WriteLine("\n1.0" + (stopwatch.Elapsed.Seconds - 2) + "." + stopwatch.Elapsed.Milliseconds); }
+                { Console.WriteLine("\n1.0" + (10 - (2 - stopwatch.Elapsed.Seconds)) + "." + stopwatch.Elapsed.Milliseconds); }
                 else
                 { Console.WriteLine("\n1.1" + (stopwatch.Elapsed.Seconds - 2) + "." + stopwatch.Elapsed.Milliseconds); }
                 Console.WriteLine("YOU JUST SET A NEW LAP RECORD");
+                score = Convert.ToInt32(stopwatch.ElapsedMilliseconds / 200);
+            }
+            else if (stopwatch.ElapsedMilliseconds < 3000)
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("\n1.1" + (stopwatch.Elapsed.Seconds - 2) + "." + stopwatch.Elapsed.Milliseconds);
+                Console.WriteLine("You got the fastest lap");
+                score = Convert.ToInt32(stopwatch.ElapsedMilliseconds / 160);
             }
             else if (stopwatch.Elapsed.Seconds < 12)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("\n1.1" + (stopwatch.Elapsed.Seconds - 2) + "." + stopwatch.Elapsed.Milliseconds);
+                Console.WriteLine("Not good");
+                score = Convert.ToInt32(stopwatch.ElapsedMilliseconds / 100);
             }
             else if (stopwatch.Elapsed.Seconds < 62)
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("\n1." + (stopwatch.Elapsed.Seconds - 2) + "." + stopwatch.Elapsed.Milliseconds);
+                Console.WriteLine("Thats bad, real bad");
+                score = 680;
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("\nYou fell asleep");
+                score = 1000;
             }
-                Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.Write("Press 'Enter' to continue");
             do
             {
                 key = Console.ReadKey(true);
             } while (key.Key != ConsoleKey.Enter);
-            return 0;
+            return score;
+        }
+        public void MiniGameGear()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("Gearing Up");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("Gear up to 8th as fast as possible\nPress 'Space' when the pointer is in the middle");
+            Console.WriteLine("\n\n" +
+                "  1   2   3   4   5   6   7   8");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("\n" +
+                "  █   █   █   █   █   █   █   █\n" +
+                "  █   █   █   █   █   █   █   █\n" +
+                "══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣\n" +
+                "  █   █   █   █   █   █   █   █\n" +
+                "  █   █   █   █   █   █   █   █");
+            Console.SetCursorPosition(0, Console.CursorTop - 10);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("Gear up to 8th as fast as possible\nPress 'Space' when the pointer is in the middle");
+            ConsoleKeyInfo key;
+            do
+            {
+                key = Console.ReadKey(true);
+            } while (key.Key != ConsoleKey.Enter);
+            Console.WriteLine("\n\n\n\n\n\n\n\n");
+            Console.CursorVisible = false;
+        }
+        public int MiniGameGear1()
+        {
+            //idk how cars work btw
+            int score = 0;
+            int gear = 0;
+            Stopwatch stopwatch = new Stopwatch();
+            bool rightTimeing = false;
+            stopwatch.Start();
+            //gear 1
+            while (!Console.KeyAvailable)
+            {
+                if (!Console.KeyAvailable == false) { gear = 1; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("  █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █\n" +
+                                  "══╬═══\n" +
+                                  "  █\n" +
+                                  "  █");
+                Task.Delay(170).Wait();
+                if (!Console.KeyAvailable == false) { gear = 1; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.WriteLine("  █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("  █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("══╬═══\n" +
+                                  "  █\n" +
+                                  "  █");
+                Task.Delay(170).Wait();
+                if (!Console.KeyAvailable == false) { gear = 1; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.WriteLine("  █\n" +
+                                  "  █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("══╬");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █\n" +
+                                  "  █");
+                Task.Delay(170).Wait();
+                if (!Console.KeyAvailable == false) { rightTimeing = true; Console.ReadKey(); break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.WriteLine("  █\n" +
+                                  "  █\n" +
+                                  "══╬═══");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("  █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █");
+                Task.Delay(170).Wait();
+                if (!Console.KeyAvailable == false) { gear = 1; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.WriteLine("  █\n" +
+                                  "  █\n" +
+                                  "══╬═══\n" +
+                                  "  █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("  █");
+                Task.Delay(170).Wait();
+                if (!Console.KeyAvailable == false) { gear = 1; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █\n" +
+                                  "  █\n" +
+                                  "══╬═══");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("  █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █");
+                Task.Delay(170).Wait();
+                if (!Console.KeyAvailable == false) { gear = 1; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.WriteLine("  █\n" +
+                                  "  █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("══╬");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █\n" +
+                                  "  █");
+                Task.Delay(170).Wait();
+                if (!Console.KeyAvailable == false) { rightTimeing = true; Console.ReadKey(); break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.WriteLine("  █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("  █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("══╬═══\n" +
+                                  "  █\n" +
+                                  "  █");
+                Task.Delay(170).Wait();
+                if (!Console.KeyAvailable == false) { gear = 1; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("  █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █\n" +
+                                  "══╬═══\n" +
+                                  "  █\n" +
+                                  "  █");
+            }
+            //gear 2
+            while (!Console.KeyAvailable && rightTimeing == true)
+            {
+                rightTimeing = false;
+                if (!Console.KeyAvailable == false) { gear = 2; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █\n  █   █");
+                Task.Delay(160).Wait();
+                if (!Console.KeyAvailable == false) { gear = 2; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █\n  █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("   █\n══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █\n  █   █");
+                Task.Delay(160).Wait();
+                if (!Console.KeyAvailable == false) { gear = 2; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █\n  █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("══╬═══╬");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █\n  █   █");
+                Task.Delay(160).Wait();
+                if (!Console.KeyAvailable == false) { rightTimeing = true; Console.ReadKey(); break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █\n  █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █");
+                Task.Delay(160).Wait();
+                if (!Console.KeyAvailable == false) { gear = 2; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █\n  █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █   █\n  █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Task.Delay(160).Wait();
+                if (!Console.KeyAvailable == false) { gear = 2; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █\n  █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █");
+                Task.Delay(160).Wait();
+                if (!Console.KeyAvailable == false) { gear = 2; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █\n  █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("══╬═══╬");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █\n  █   █");
+                Task.Delay(160).Wait();
+                if (!Console.KeyAvailable == false) { rightTimeing = true; Console.ReadKey(); break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █\n  █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("   █\n══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █\n  █   █");
+                Task.Delay(160).Wait();
+                if (!Console.KeyAvailable == false) { gear = 2; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █\n  █   █");
+                rightTimeing = true;
+            }
+            //gear 3
+            while (!Console.KeyAvailable && rightTimeing == true)
+            {
+                rightTimeing = false;
+                if (!Console.KeyAvailable == false) { gear = 3; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █\n  █   █   █");
+                Task.Delay(150).Wait();
+                if (!Console.KeyAvailable == false) { gear = 3; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █\n  █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("   █\n══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █\n  █   █   █");
+                Task.Delay(150).Wait();
+                if (!Console.KeyAvailable == false) { gear = 3; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █\n  █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("══╬═══╬═══╬");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █\n  █   █   █");
+                Task.Delay(150).Wait();
+                if (!Console.KeyAvailable == false) { rightTimeing = true; Console.ReadKey(); break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █\n  █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █");
+                Task.Delay(150).Wait();
+                if (!Console.KeyAvailable == false) { gear = 3; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █\n  █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █   █   █\n  █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Task.Delay(150).Wait();
+                if (!Console.KeyAvailable == false) { gear = 3; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █\n  █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █");
+                Task.Delay(150).Wait();
+                if (!Console.KeyAvailable == false) { gear = 3; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █\n  █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("══╬═══╬═══╬");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █\n  █   █   █");
+                Task.Delay(150).Wait();
+                if (!Console.KeyAvailable == false) { rightTimeing = true; Console.ReadKey(); break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █\n  █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("   █\n══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █\n  █   █   █");
+                Task.Delay(150).Wait();
+                if (!Console.KeyAvailable == false) { gear = 3; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █\n  █   █   █");
+                rightTimeing = true;
+            }
+            //gear 4
+            while (!Console.KeyAvailable && rightTimeing == true)
+            {
+                rightTimeing = false;
+                if (!Console.KeyAvailable == false) { gear = 4; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █   █\n  █   █   █   █");
+                Task.Delay(140).Wait();
+                if (!Console.KeyAvailable == false) { gear = 4; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █\n  █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("   █\n══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █   █\n  █   █   █   █");
+                Task.Delay(140).Wait();
+                if (!Console.KeyAvailable == false) { gear = 4; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █\n  █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("══╬═══╬═══╬═══╬");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █\n  █   █   █   █");
+                Task.Delay(140).Wait();
+                if (!Console.KeyAvailable == false) { rightTimeing = true; Console.ReadKey(); break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █\n  █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █");
+                Task.Delay(140).Wait();
+                if (!Console.KeyAvailable == false) { gear = 4; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █\n  █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █   █   █   █\n  █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Task.Delay(140).Wait();
+                if (!Console.KeyAvailable == false) { gear = 4; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █\n  █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █");
+                Task.Delay(140).Wait();
+                if (!Console.KeyAvailable == false) { gear = 4; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █\n  █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("══╬═══╬═══╬═══╬");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █\n  █   █   █   █");
+                Task.Delay(140).Wait();
+                if (!Console.KeyAvailable == false) { rightTimeing = true; Console.ReadKey(); break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █\n  █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("   █\n══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █   █\n  █   █   █   █");
+                Task.Delay(140).Wait();
+                if (!Console.KeyAvailable == false) { gear = 4; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █   █\n  █   █   █   █");
+                rightTimeing = true;
+            }
+            //gear 5
+            while (!Console.KeyAvailable && rightTimeing == true)
+            {
+                rightTimeing = false;
+                if (!Console.KeyAvailable == false) { gear = 5; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █   █   █\n  █   █   █   █   █");
+                Task.Delay(130).Wait();
+                if (!Console.KeyAvailable == false) { gear = 5; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █   █\n  █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("   █\n══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █   █   █\n  █   █   █   █   █");
+                Task.Delay(130).Wait();
+                if (!Console.KeyAvailable == false) { gear = 5; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █\n  █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("══╬═══╬═══╬═══╬═══╬");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █\n  █   █   █   █   █");
+                Task.Delay(130).Wait();
+                if (!Console.KeyAvailable == false) { rightTimeing = true; Console.ReadKey(); break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █\n  █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █");
+                Task.Delay(130).Wait();
+                if (!Console.KeyAvailable == false) { gear = 5; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █\n  █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █   █   █   █   █\n  █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Task.Delay(130).Wait();
+                if (!Console.KeyAvailable == false) { gear = 5; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █\n  █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █");
+                Task.Delay(130).Wait();
+                if (!Console.KeyAvailable == false) { gear = 5; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █\n  █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("══╬═══╬═══╬═══╬═══╬");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █\n  █   █   █   █   █");
+                Task.Delay(130).Wait();
+                if (!Console.KeyAvailable == false) { rightTimeing = true; Console.ReadKey(); break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █   █\n  █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("   █\n══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █   █   █\n  █   █   █   █   █");
+                Task.Delay(130).Wait();
+                if (!Console.KeyAvailable == false) { gear = 5; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █   █   █\n  █   █   █   █   █");
+                rightTimeing = true;
+            }
+            //gear 6
+            while (!Console.KeyAvailable && rightTimeing == true)
+            {
+                rightTimeing = false;
+                if (!Console.KeyAvailable == false) { gear = 6; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █   █   █   █\n  █   █   █   █   █   █");
+                Task.Delay(120).Wait();
+                if (!Console.KeyAvailable == false) { gear = 6; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █   █   █\n  █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("   █\n══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █   █   █   █\n  █   █   █   █   █   █");
+                Task.Delay(120).Wait();
+                if (!Console.KeyAvailable == false) { gear = 6; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █\n  █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("══╬═══╬═══╬═══╬═══╬═══╬");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █\n  █   █   █   █   █   █");
+                Task.Delay(120).Wait();
+                if (!Console.KeyAvailable == false) { rightTimeing = true; Console.ReadKey(); break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █\n  █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █");
+                Task.Delay(120).Wait();
+                if (!Console.KeyAvailable == false) { gear = 6; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █\n  █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █   █   █   █   █   █\n  █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Task.Delay(120).Wait();
+                if (!Console.KeyAvailable == false) { gear = 6; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █\n  █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █");
+                Task.Delay(120).Wait();
+                if (!Console.KeyAvailable == false) { gear = 6; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █\n  █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("══╬═══╬═══╬═══╬═══╬═══╬");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █\n  █   █   █   █   █   █");
+                Task.Delay(120).Wait();
+                if (!Console.KeyAvailable == false) { rightTimeing = true; Console.ReadKey(); break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █   █   █\n  █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("   █\n══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █   █   █   █\n  █   █   █   █   █   █");
+                Task.Delay(120).Wait();
+                if (!Console.KeyAvailable == false) { gear = 6; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █   █   █   █\n  █   █   █   █   █   █");
+                rightTimeing = true;
+            }
+            //gear 7
+            while (!Console.KeyAvailable && rightTimeing == true)
+            {
+                rightTimeing = false;
+                if (!Console.KeyAvailable == false) { gear = 7; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █   █   █   █   █\n  █   █   █   █   █   █   █");
+                Task.Delay(110).Wait();
+                if (!Console.KeyAvailable == false) { gear = 7; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █   █   █   █\n  █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("   █\n══╬═══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █   █   █   █   █\n  █   █   █   █   █   █   █");
+                Task.Delay(110).Wait();
+                if (!Console.KeyAvailable == false) { gear = 7; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █\n  █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("══╬═══╬═══╬═══╬═══╬═══╬═══╬");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █\n  █   █   █   █   █   █   █");
+                Task.Delay(110).Wait();
+                if (!Console.KeyAvailable == false) { rightTimeing = true; Console.ReadKey(); break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █\n  █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █");
+                Task.Delay(110).Wait();
+                if (!Console.KeyAvailable == false) { gear = 7; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █\n  █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █   █   █   █   █   █   █\n  █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Task.Delay(110).Wait();
+                if (!Console.KeyAvailable == false) { gear = 7; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █\n  █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╬\n  █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █");
+                Task.Delay(110).Wait();
+                if (!Console.KeyAvailable == false) { gear = 7; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █\n  █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("══╬═══╬═══╬═══╬═══╬═══╬═══╬");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █\n  █   █   █   █   █   █   █");
+                Task.Delay(110).Wait();
+                if (!Console.KeyAvailable == false) { rightTimeing = true; Console.ReadKey(); break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █   █   █   █\n  █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("   █\n══╬═══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █   █   █   █   █\n  █   █   █   █   █   █   █");
+                Task.Delay(110).Wait();
+                if (!Console.KeyAvailable == false) { gear = 7; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╬\n  █   █   █   █   █   █   █\n  █   █   █   █   █   █   █");
+                rightTimeing = true;
+            }
+            //gear 8
+            while (!Console.KeyAvailable && rightTimeing == true)
+            {
+                rightTimeing = false;
+                if (!Console.KeyAvailable == false) { gear = 8; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╣\n  █   █   █   █   █   █   █   █\n  █   █   █   █   █   █   █   █");
+                Task.Delay(100).Wait();
+                if (!Console.KeyAvailable == false) { gear = 8; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █   █   █   █   █\n  █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("   █\n══╬═══╬═══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╣\n  █   █   █   █   █   █   █   █\n  █   █   █   █   █   █   █   █");
+                Task.Delay(100).Wait();
+                if (!Console.KeyAvailable == false) { gear = 8; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █   █\n  █   █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █   █\n  █   █   █   █   █   █   █   █");
+                Task.Delay(100).Wait();
+                if (!Console.KeyAvailable == false) { rightTimeing = true; Console.ReadKey(); break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █   █\n  █   █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╣\n  █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █   █");
+                Task.Delay(100).Wait();
+                if (!Console.KeyAvailable == false) { gear = 8; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █   █\n  █   █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╣\n  █   █   █   █   █   █   █   █\n  █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Task.Delay(100).Wait();
+                if (!Console.KeyAvailable == false) { gear = 8; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █   █\n  █   █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("╣\n  █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █   █");
+                Task.Delay(100).Wait();
+                if (!Console.KeyAvailable == false) { gear = 8; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █   █\n  █   █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("══╬═══╬═══╬═══╬═══╬═══╬═══╬═══╣");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █   █\n  █   █   █   █   █   █   █   █");
+                Task.Delay(100).Wait();
+                if (!Console.KeyAvailable == false) { rightTimeing = true; Console.ReadKey(); break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █   █   █   █   █\n  █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("   █\n══╬═══╬═══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╣\n  █   █   █   █   █   █   █   █\n  █   █   █   █   █   █   █   █");
+                Task.Delay(100).Wait();
+                if (!Console.KeyAvailable == false) { gear = 8; break; }
+                Console.SetCursorPosition(0, Console.CursorTop - 5);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("  █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("   █");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("  █   █   █   █   █   █   █   █");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("══╬═══╬═══╬═══╬═══╬═══╬═══╬═══");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("╣\n  █   █   █   █   █   █   █   █\n  █   █   █   █   █   █   █   █");
+                rightTimeing = true;
+            }
+            stopwatch.Stop();
+            Console.CursorVisible = true;
+            if (rightTimeing == true)
+            {
+                if (stopwatch.Elapsed.Seconds < 4)
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine($"\nPerfect acceleration, Time - {stopwatch.Elapsed.Seconds}.{stopwatch.Elapsed.Milliseconds}");
+                    score = 5;
+                }
+                else if (stopwatch.Elapsed.Seconds < 8)
+                {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine($"\nGood acceleration, Time - {stopwatch.Elapsed.Seconds}.{stopwatch.Elapsed.Milliseconds}");
+                    score = 10;
+                }
+                else if (stopwatch.Elapsed.Seconds < 13)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine($"\nNormal acceleration, Time - {stopwatch.Elapsed.Seconds}.{stopwatch.Elapsed.Milliseconds}");
+                    score = 35;
+                }
+                else if (stopwatch.Elapsed.Seconds < 20)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"\nBad acceleration, Time - {stopwatch.Elapsed.Seconds}.{stopwatch.Elapsed.Milliseconds}");
+                    score = 80;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"\nSnale pace, Time - {stopwatch.Elapsed.Seconds}.{stopwatch.Elapsed.Milliseconds}");
+                    score = 200;
+                }
+            }
+            else
+            {
+                Console.Write($"\nYou got to gear {gear - 1} - ");
+                switch (gear)
+                {
+                    case 1:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("sucky");
+                        score = 1000;
+                        break;
+                    case 2:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("super bad");
+                        score = 900;
+                        break;
+                    case 3:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("very bad");
+                        score = 800;
+                        break;
+                    case 4:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("bad");
+                        score = 700;
+                        break;
+                    case 5:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("mid bad");
+                        score = 600;
+                        break;
+                    case 6:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("whatever");
+                        score = 500;
+                        break;
+                    case 7:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("oke");
+                        score = 400;
+                        break;
+                    case 8:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("eh");
+                        score = 300;
+                        break;
+                }
+            }
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            ConsoleKeyInfo key;
+            Console.Write("Press 'Enter' to continue");
+            do
+            {
+                key = Console.ReadKey(true);
+            } while (key.Key != ConsoleKey.Enter);
+            return score;
         }
     }
 }
