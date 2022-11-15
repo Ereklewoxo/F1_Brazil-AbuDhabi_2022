@@ -2461,7 +2461,7 @@ namespace F1_Brazil_GP
                 Console.WriteLine();
             }
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.Write("Press 'Enter' to continue");
+            Console.Write("Press 'Enter' to exit");
             do
             {
                 key = Console.ReadKey(true);
