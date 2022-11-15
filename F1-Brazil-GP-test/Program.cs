@@ -2,80 +2,307 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
 
 namespace F1_Brazil_GP
 {
+    public class Display
+    {
+        public void F1Logo()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write("     ______________  __" +
+                            "\n   /  ____________//  /" +
+                            "\n  /  /  _________//  /" +
+                            "\n /__/__/         /__/" +
+                            "\n\n   |");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("BRAZIL 2022 GP");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("|");
+        }
+        public void Map()
+        {
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("\n                       F1F1-BRAZILIAN-GP-F1F1" +
+                          "\n                    F1F                F1F   F1" +
+                          "\n                 F1F      F1F1F1    F1F  F1    F1" +
+                          "\n             START     F1F1   F1  F1F   F1F      F1 " +
+                          "\n           F1F        F1       F1F1   F1          F1" +
+                          "\n        F1F           F1F            F1           F1" +
+                          "\n     F1F                 F1F1F         F1F1F      F1" +
+                          "\n   F1F                        F1F1F1F       F1F1F1" +
+                          "\n     F1F                             F1F1" +
+                          "\n     F1                                 F1" +
+                          "\n     F1                                  F1" +
+                          "\n      F1                                F1" +
+                          "\n        F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1\n");
+            for (int i = 0; i < 1;)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("\nLength - 4.31KM");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("  Lap record");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(" - 1.10.540 V. Bottas (2018)");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write("■ ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("- Sector 1");
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                Console.Write("  ■ ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("- Sector 2");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write("  ■ ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("- Sector 3");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("  DRS ");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Zones - 2");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("Or press 'Enter' to continue");
+                Console.ForegroundColor = ConsoleColor.Black;
+                var keyPressed = Console.ReadKey().Key;
+                if (keyPressed == ConsoleKey.D1)
+                {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.SetCursorPosition(0, Console.CursorTop - 17);
+                    Console.Write("                                               " +
+                                  "\n\r                       F1F1-BRAZILIAN-GP-F1F1" +
+                                  "\n\r                    F1F                F1F   F1" +
+                                  "\n\r                 F1F      F1F1F1    F1F  F1    F1" +
+                                  "\n\r             START     F1F1   F1  F1F   F1F      F1 " +
+                                  "\n\r           F1F        F1       F1F1   F1          F1" +
+                                  "\n\r        F1F           F1F            F1           F1" +
+                                  "\n\r     F1F                 F1F1F         F1F1F      F1" +
+                                  "\n\r   F1F                        F1F1F1F       F1F1F1" +
+                                  "\n\r     F1F                             F1F1" +
+                                  "\n\r     F1                                 F1" +
+                                  "\n\r     F1                                  F1" +
+                                  "\n\r      F1                                F1" +
+                                  "\n\r        F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1");
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.SetCursorPosition(0, Console.CursorTop - 10);
+                    Console.Write("\n\r             START" +
+                                  "\n\r           F1F" +
+                                  "\n\r        F1F" +
+                                  "\n\r     F1F" +
+                                  "\n\r   F1F" +
+                                  "\n\r     F1F" +
+                                  "\n\r     F1" +
+                                  "\n\r     F1" +
+                                  "\n\r      F1" +
+                                  "\n\r        F1F1F1F-71-LAPS-15-TURNS-F1F\n");
+                }
+                else if (keyPressed == ConsoleKey.D2)
+                {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.SetCursorPosition(0, Console.CursorTop - 17);
+                    Console.Write("                                               " +
+                                  "\n\r                       F1F1-BRAZILIAN-GP-F1F1" +
+                                  "\n\r                    F1F                F1F   F1" +
+                                  "\n\r                 F1F      F1F1F1    F1F  F1    F1" +
+                                  "\n\r             START     F1F1   F1  F1F   F1F      F1 " +
+                                  "\n\r           F1F        F1       F1F1   F1          F1" +
+                                  "\n\r        F1F           F1F            F1           F1" +
+                                  "\n\r     F1F                 F1F1F         F1F1F      F1" +
+                                  "\n\r   F1F                        F1F1F1F       F1F1F1" +
+                                  "\n\r     F1F                             F1F1" +
+                                  "\n\r     F1                                 F1" +
+                                  "\n\r     F1                                  F1" +
+                                  "\n\r      F1                                F1" +
+                                  "\n\r        F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1");
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    Console.SetCursorPosition(0, Console.CursorTop - 12);
+                    Console.Write("\n\r                                       F1F" +
+                                  "\n\r                          F1F1F1    F1F  F1" +
+                                  "\n\r                       F1F1   F1  F1F   F1F" +
+                                  "\n\r                      F1       F1F1   F1" +
+                                  "\n\r                      F1F            F1" +
+                                  "\n\r                         F1F1F         F1F1F" +
+                                  "\n\r                              F1F1F1F       F1F" +
+                                  "\n\r                                     F1F1" +
+                                  "\n\r                                        F1" +
+                                  "\n\r                                         F1" +
+                                  "\n\r                                        F1" +
+                                  "\n\r                                    1F1F1");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.SetCursorPosition(0, Console.CursorTop - 12);
+                    Console.Write("\n\r                    F1F" +
+                                  "\n\r                 F1F" +
+                                  "\n\r             START" +
+                                  "\n\r           F1F" +
+                                  "\n\r        F1F" +
+                                  "\n\r     F1F" +
+                                  "\n\r   F1F" +
+                                  "\n\r     F1F" +
+                                  "\n\r     F1" +
+                                  "\n\r     F1" +
+                                  "\n\r      F1" +
+                                  "\n\r        F1F1F1F-71-LAPS-15-TURNS-F1F\n");
+                }
+                else if (keyPressed == ConsoleKey.D3)
+                {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.SetCursorPosition(0, Console.CursorTop - 17);
+                    Console.Write("                                               " +
+                                  "\n\r                       F1F1-BRAZILIAN-GP-F1F1" +
+                                  "\n\r                    F1F                F1F   F1" +
+                                  "\n\r                 F1F      F1F1F1    F1F  F1    F1" +
+                                  "\n\r             START     F1F1   F1  F1F   F1F      F1 " +
+                                  "\n\r           F1F        F1       F1F1   F1          F1" +
+                                  "\n\r        F1F           F1F            F1           F1" +
+                                  "\n\r     F1F                 F1F1F         F1F1F      F1" +
+                                  "\n\r   F1F                        F1F1F1F       F1F1F1" +
+                                  "\n\r     F1F                             F1F1" +
+                                  "\n\r     F1                                 F1" +
+                                  "\n\r     F1                                  F1" +
+                                  "\n\r      F1                                F1" +
+                                  "\n\r        F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.SetCursorPosition(0, Console.CursorTop - 13);
+                    Console.Write("\n\r                       F1F1-BRAZILIAN-GP-F1F1" +
+                                  "\n\r                                             F1" +
+                                  "\n\r                                               F1" +
+                                  "\n\r                                                 F1" +
+                                  "\n\r                                                  F1" +
+                                  "\n\r                                                  F1" +
+                                  "\n\r                                                  F1" +
+                                  "\n\r                                               1F1");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.SetCursorPosition(0, Console.CursorTop - 7);
+                    Console.Write("\n\r                                       F1F" +
+                                  "\n\r                          F1F1F1    F1F  F1" +
+                                  "\n\r             START     F1F1   F1  F1F   F1F" +
+                                  "\n\r           F1F        F1       F1F1   F1" +
+                                  "\n\r        F1F           F1F            F1" +
+                                  "\n\r     F1F                 F1F1F         F1F1F" +
+                                  "\n\r   F1F                        F1F1F1F       F1F" +
+                                  "\n\r     F1F                             F1F1" +
+                                  "\n\r     F1                                 F1" +
+                                  "\n\r     F1                                  F1" +
+                                  "\n\r      F1                                F1" +
+                                  "\n\r        F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.SetCursorPosition(0, Console.CursorTop - 12);
+                    Console.Write("\n\r                    F1F" +
+                                  "\n\r                 F1F\n\n\n\n\n\n\n\n\n\n\n");
+                }
+                else if (keyPressed == ConsoleKey.D || keyPressed == ConsoleKey.D4)
+                {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.SetCursorPosition(0, Console.CursorTop - 17);
+                    Console.Write("\n                       F1F1-BRAZILIAN-GP-F1F1" +
+                                  "\n                    F1F                F1F   F1" +
+                                  "\n                 F1F      F1F1F1    F1F  F1    F1" +
+                                  "\n             START     F1F1   F1  F1F   F1F      F1 " +
+                                  "\n           F1F        F1       F1F1   F1          F1" +
+                                  "\n        F1F           F1F            F1           F1" +
+                                  "\n     F1F                 F1F1F         F1F1F      F1" +
+                                  "\n   F1F                        F1F1F1F       F1F1F1" +
+                                  "\n     F1F                             F1F1" +
+                                  "\n     F1                                 F1" +
+                                  "\n     F1                                  F1" +
+                                  "\n      F1                                F1" +
+                                  "\n        F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.SetCursorPosition(0, Console.CursorTop - 13);
+                    Console.Write("                       ____" +
+                                  "\n\r                    __/" +
+                                  "\n\r                 __/" +
+                                  "\n\r             ___/" +
+                                  "\n\r           _/                                    F1" +
+                                  "\n\r        __/" +
+                                  "\n\r      _/" +
+                                  "\n\r" +
+                                  "\n\r   F1F" +
+                                  "\n\r" +
+                                  "\n\r" +
+                                  "\n\r" +
+                                  "\n\r         ______________________________");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.SetCursorPosition(0, Console.CursorTop - 9);
+                    Console.Write("\n\r             START     F1F1   F1  F1F   F1F" +
+                                  "\n\r" +
+                                  "\n\r" +
+                                  "\n\r" +
+                                  "\n\r" +
+                                  "\n\r" +
+                                  "\n\r" +
+                                  "\n\r" +
+                                  "\n\r      F1");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.SetCursorPosition(0, Console.CursorTop - 9);
+                    Console.Write("\n\r           _/\n\n\n\n\n\n\n\n\n\n");
+                }
+                else if (keyPressed == ConsoleKey.Enter)
+                { i++; }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.SetCursorPosition(0, Console.CursorTop - 17);
+                    Console.Write("                                               " +
+                                  "\n\r                       F1F1-BRAZILIAN-GP-F1F1" +
+                                  "\n\r                    F1F                F1F   F1" +
+                                  "\n\r                 F1F      F1F1F1    F1F  F1    F1" +
+                                  "\n\r             START     F1F1   F1  F1F   F1F      F1 " +
+                                  "\n\r           F1F        F1       F1F1   F1          F1" +
+                                  "\n\r        F1F           F1F            F1           F1" +
+                                  "\n\r     F1F                 F1F1F         F1F1F      F1" +
+                                  "\n\r   F1F                        F1F1F1F       F1F1F1" +
+                                  "\n\r     F1F                             F1F1" +
+                                  "\n\r     F1                                 F1" +
+                                  "\n\r     F1                                  F1" +
+                                  "\n\r      F1                                F1" +
+                                  "\n\r        F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1\n");
+                }
+            }
+        }
+        public void RedLights()
+        {
+            Console.CursorVisible = false;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(0, Console.CursorTop - 21);
+            Console.Write("\r      ·····");
+            Task.Delay(1000).Wait();
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write("\r      ·");
+            Task.Delay(1000).Wait();
+            Console.Write("\r      ··");
+            Task.Delay(1000).Wait();
+            Console.Write("\r      ···");
+            Task.Delay(1000).Wait();
+            Console.Write("\r      ····");
+            Task.Delay(1000).Wait();
+            Console.Write("\r      ·····");
+            Task.Delay(1000).Wait();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("\r      ·····");
+            Task.Delay(1000).Wait();
+            Console.CursorVisible = true;
+        }
+    }
     class Program
     {
         static void Main(string[] args)
         {
             Program program = new Program();
+            Display display = new Display();
+            ConsoleKeyInfo key;
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Clear();
             var teamList = new List<string> { "Mercedes", "Red Bull", "Ferrari", "McLaren", "Alpine", "AlphaTauri", "Aston Martin", "Williams", "Alfa Romeo", "Haas" };
             var racerList = new List<string> { "Charles Leclerc", "Max Verstappen", "Carlos Sainz", "Sergio Perez", "Lewis Hamilton", "George Russell", "Fernando Alonso", "Lando Norris", "Esteban Ocon", "Valtteri Bottas", "Daniel Ricciardo", "Pierre Gasly", "Kevin Magnussen", "Nyck De Vries", "Yuki Tsunoda", "Mick Schumacher", "Zhou Guanyu", "Sebastian Vettel", "Alexander Albon", "Lance Stroll" };
             var racerListS = new List<string> { "LEC", "VER", "SAI", "PER", "HAM", "RUS", "ALO", "NOR", "OCO", "BOT", "RIC", "GAS", "MAG", "DEV", "TSU", "MSC", "ZHO", "VET", "ALB", "STR" };
             string userTeam = "Audi";
-            ConsoleKeyInfo key;
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.Clear();
-            F1Logo();
+            display.F1Logo();
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("\nWhat's your first name?");
-            string userFirstName = Console.ReadLine();
-            if (userFirstName.Length == 1)
-            {
-                userFirstName = userFirstName.ToUpper();
-            }
-            else if (userFirstName.Length == 0)
-            {
-                userFirstName = "John";
-            }
-            else
-            {
-                userFirstName = userFirstName.Remove(1).ToUpper() + userFirstName.Remove(0, 1).ToLower();
-            }
-            Console.SetCursorPosition(0, Console.CursorTop - 2);
-            Console.Write($"And your last name?    \n{userFirstName} ");
-            string userLastName = Console.ReadLine();
-            if (userLastName.Length == 1)
-            {
-                userLastName = userLastName.ToUpper();
-            }
-            else if (userLastName.Length == 0)
-            {
-                userLastName = "Doe";
-            }
-            else
-            {
-                userLastName = userLastName.Remove(1).ToUpper() + userLastName.Remove(0, 1).ToLower();
-            }
-            string userName = userFirstName + " " + userLastName;
-            string userNameS;
-            if (userLastName.Length == 3)
-            {
-                userNameS = userLastName;
-            }
-            else if (userFirstName.Length + userLastName.Length < 3)
-            {
-                userNameS = userFirstName + userLastName;
-            }
-            else if (userFirstName.Length + userLastName.Length == 3)
-            {
-                userNameS = userFirstName + userLastName;
-            }
-            else if (userFirstName.Length > 1 && userLastName.Length == 1)
-            {
-                userNameS = userFirstName.Remove(2) + userLastName;
-            }
-            else if (userFirstName.Length > 1 && userLastName.Length < 3)
-            {
-                userNameS = userFirstName.Remove(1) + userLastName;
-            }
-            else
-            {
-                userNameS = userLastName.Remove(3);
-            }
-            userNameS = userNameS.ToUpper();
+            var userNameFullAndShort = program.Names();
+            string userName = userNameFullAndShort[0];
+            string userNameS = userNameFullAndShort[1];
             if (racerListS.Contains(userNameS))
             { userNameS = "YOU"; }
             Console.Clear();
@@ -813,8 +1040,30 @@ namespace F1_Brazil_GP
                 } while (pole == pos20 || pos2 == pos20 || pos3 == pos20 || pos4 == pos20 || pos5 == pos20 || pos6 == pos20 || pos7 == pos20 || pos8 == pos20 || pos9 == pos20 || pos10 == pos20 || pos11 == pos20 || pos12 == pos20 || pos13 == pos20 || pos14 == pos20 || pos15 == pos20 || pos16 == pos20 || pos17 == pos20 || pos18 == pos20 || pos19 == pos20);
             } while (pole == pos2);
             var lineup = new List<string> { pole, pos2, pos3, pos4, pos5, pos6, pos7, pos8, pos9, pos10, pos11, pos12, pos13, pos14, pos15, pos16, pos17, pos18, pos19, pos20 };
-            int writeLineup;
             Console.Clear();
+            int writeLineup;
+            int rndWeather = rnd.Next(100);
+            double weather;
+            if (rndWeather < 30)
+            {
+                weather = 1.1;
+            }
+            else if (rndWeather < 60)
+            {
+                weather = 1;
+            }
+            else if (rndWeather < 80)
+            {
+                weather = 1.7;
+            }
+            else if (rndWeather < 93)
+            {
+                weather = 4.5;
+            }
+            else
+            {
+                weather = 6.9;
+            }
             for (int min = 30; min < 60; min++)
             {
                 Console.ForegroundColor = ConsoleColor.Gray;
@@ -823,7 +1072,7 @@ namespace F1_Brazil_GP
                 Console.Write("FORMULA 1 ");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Sao Paulo Grand Prix\n\nThe Race is about to begin\nYou may: 1 - Check starting positions" +
-                                  "\n         2 - Check the circuit\n         3 - Read the tutorial\n         4 - Start the Race");
+                                  "\n         2 - Check the circuit\n         3 - Weather forcast\n         4 - Start the Race");
                 var preRace = Console.ReadKey().Key;
                 if (preRace == ConsoleKey.D1)
                 {
@@ -936,16 +1185,35 @@ namespace F1_Brazil_GP
                 else if (preRace == ConsoleKey.D2)
                 {
                     Console.Clear();
-                    Map();
+                    display.Map();
                     Console.Clear();
                 }
                 else if (preRace == ConsoleKey.D3)
                 {
                     Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("For now this is just sim");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    if (rndWeather < 30)
+                    {
+                        Console.WriteLine("\n   \\_|_/      It's sunny\n __/   \\__\n   \\___/\n   / | \\");
+                    }
+                    else if (rndWeather < 60)
+                    {
+                        Console.WriteLine("\n     .--.      It's cloudy\n  .-(    ).\n (___.__)__)");
+                    }
+                    else if (rndWeather < 80)
+                    {
+                        Console.WriteLine("\n     .--.      It's raining\n  .-(    ).    Intensity: 1\n (___.__)__)\n   |  |  |");
+                    }
+                    else if (rndWeather < 93)
+                    {
+                        Console.WriteLine("\n     .--.      It's raining\n  .-(    ).    Intensity: 2\n (___.__)__)\n  | | | | |");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\n     .--.      It's raining\n  .-(    ).    Intensity: 3\n (___.__)__)\n  |||||||||");
+                    }
                     Console.ForegroundColor = ConsoleColor.DarkGray;
-                    Console.Write("Press 'Enter' to continue");
+                    Console.Write("\nPress 'Enter' to continue");
                     do
                     {
                         key = Console.ReadKey(true);
@@ -1055,7 +1323,7 @@ namespace F1_Brazil_GP
                 }
                 Console.WriteLine("/");
             }
-            RedLights();
+            display.RedLights();
             Console.Clear();
             Console.WriteLine("It's lights out and away we go");
             Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -1128,7 +1396,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 27, 27 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(27, 27 + (VERp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.002)
                             {
                                 random = (9 - race) * 1000 + 1;
@@ -1141,7 +1409,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 33, 33 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(33, 33 + (LECp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.003)
                             {
                                 random = (9 - race) * 1000 + 2;
@@ -1154,7 +1422,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 46, 46 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(46, 46 + (HAMp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.001)
                             {
                                 random = (9 - race) * 1000 + 3;
@@ -1167,7 +1435,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 45, 45 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(45, 45 + (RUSp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.001)
                             {
                                 random = (9 - race) * 1000 + 4;
@@ -1180,7 +1448,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 38, 38 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(38, 38 + (PERp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.003)
                             {
                                 random = (9 - race) * 1000 + 5;
@@ -1193,7 +1461,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 35, 35 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(35, 35 + (SAIp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.005)
                             {
                                 random = (9 - race) * 1000 + 6;
@@ -1206,7 +1474,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 78, 78 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(78, 78 + (NORp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.001)
                             {
                                 random = (9 - race) * 1000 + 7;
@@ -1219,7 +1487,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 117, 117 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(117, 117 + (RICp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.002)
                             {
                                 random = (9 - race) * 1000 + 8;
@@ -1232,7 +1500,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 82, 82 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(82, 82 + (OCOp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.002)
                             {
                                 random = (9 - race) * 1000 + 9;
@@ -1245,7 +1513,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 88, 88 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(88, 88 + (ALOp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.005)
                             {
                                 random = (9 - race) * 1000 + 10;
@@ -1258,7 +1526,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 112, 112 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(112, 112 + (GASp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.005)
                             {
                                 random = (9 - race) * 1000 + 11;
@@ -1271,7 +1539,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 128, 128 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(128, 128 + (TSUp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.007)
                             {
                                 random = (9 - race) * 1000 + 12;
@@ -1284,7 +1552,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 117, 117 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(117, 117 + (STRp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.003)
                             {
                                 random = (9 - race) * 1000 + 13;
@@ -1297,7 +1565,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 105, 105 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(105, 105 + (VETp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.004)
                             {
                                 random = (9 - race) * 1000 + 14;
@@ -1310,7 +1578,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 126, 126 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(126, 126 + (ALBp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.004)
                             {
                                 random = (9 - race) * 1000 + 15;
@@ -1323,7 +1591,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 100, 100 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(100, 100 + (DEVp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.004)
                             {
                                 random = (9 - race) * 1000 + 16;
@@ -1336,7 +1604,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 102, 102 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(102, 102 + (BOTp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.005)
                             {
                                 random = (9 - race) * 1000 + 17;
@@ -1349,7 +1617,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 130, 130 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(130, 130 + (ZHOp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.006)
                             {
                                 random = (9 - race) * 1000 + 18;
@@ -1362,7 +1630,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 129, 129 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(129, 129 + (MAGp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.004)
                             {
                                 random = (9 - race) * 1000 + 19;
@@ -1375,7 +1643,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(j + 135, 135 + (j + 1) * 10); }
                             else
                             { random = rnd.Next(135, 135 + (MSCp + 1) * 15); }
-                            randomDNF = rnd.NextDouble();
+                            randomDNF = rnd.NextDouble() * weather;
                             if (randomDNF < 0.002)
                             {
                                 random = (9 - race) * 1000 + 20;
@@ -1389,7 +1657,7 @@ namespace F1_Brazil_GP
                             { random = rnd.Next(score, score + (j + 1) * 15); }
                             else
                             { random = rnd.Next(score, score + (USERp + 1) * 15); }
-                            if (score > 1000)
+                            if (score > 1001)
                             {
                                 random = (9 - race) * 1000;
                             }
@@ -1682,7 +1950,10 @@ namespace F1_Brazil_GP
                     }
                 }
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine($"LAP {lapCount}/71");
+                if (race == 7)
+                    Console.WriteLine("▀▄▀▄▀▄▀▄");
+                else
+                    Console.WriteLine($"LAP {lapCount}/71");
                 lapCount += 10;
                 for (int i = 0; i < 20; i++)
                 {
@@ -1821,13 +2092,13 @@ namespace F1_Brazil_GP
                         if (userGotFL)
                         {
                             Console.ForegroundColor = ConsoleColor.Magenta;
-                            Console.Write("☼");
+                            Console.Write("♦");
                         }
                     }
                     if (i == flHolder)
                     {
                         Console.ForegroundColor = ConsoleColor.Magenta;
-                        Console.Write("☼");
+                        Console.Write("♦");
                     }
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write("\n");
@@ -1840,281 +2111,422 @@ namespace F1_Brazil_GP
                 } while (key.Key != ConsoleKey.Enter);
                 Console.ForegroundColor = ConsoleColor.White;
             }
-        }
-        public static void F1Logo()
-        {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.Write("     ______________  __" +
-                            "\n   /  ____________//  /" +
-                            "\n  /  /  _________//  /" +
-                            "\n /__/__/         /__/" +
-                            "\n\n   |");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("BRAZIL 2022 GP");
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("|");
-        }
-        public static void Map()
-        {
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.Write("\n                       F1F1-BRAZILIAN-GP-F1F1" +
-                          "\n                    F1F                F1F   F1" +
-                          "\n                 F1F      F1F1F1    F1F  F1    F1" +
-                          "\n             START     F1F1   F1  F1F   F1F      F1 " +
-                          "\n           F1F        F1       F1F1   F1          F1" +
-                          "\n        F1F           F1F            F1           F1" +
-                          "\n     F1F                 F1F1F         F1F1F      F1" +
-                          "\n   F1F                        F1F1F1F       F1F1F1" +
-                          "\n     F1F                             F1F1" +
-                          "\n     F1                                 F1" +
-                          "\n     F1                                  F1" +
-                          "\n      F1                                F1" +
-                          "\n        F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1\n");
-            for (int i = 0; i < 1;)
+            Console.Clear();
+            if (USER > 1000)
             {
+                Console.Write("That concludes the race\n\nYou");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.Write(" DNF ");
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("\nLength - 4.31KM");
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.Write("  Lap record");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(" - 1.10.540 V. Bottas (2018)");
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.Write("■ ");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("- Sector 1");
-                Console.ForegroundColor = ConsoleColor.DarkBlue;
-                Console.Write("  ■ ");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("- Sector 2");
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.Write("  ■ ");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("- Sector 3");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write("  DRS ");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("Zones - 2");
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.Write("Or press 'Enter' to continue");
-                Console.ForegroundColor = ConsoleColor.Black;
-                var keyPressed = Console.ReadKey().Key;
-                if (keyPressed == ConsoleKey.D1)
+                Console.Write("and got " + (USERp + 1));
+                switch (USERp)
                 {
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.SetCursorPosition(0, Console.CursorTop - 17);
-                    Console.Write("                                               " +
-                                  "\n\r                       F1F1-BRAZILIAN-GP-F1F1" +
-                                  "\n\r                    F1F                F1F   F1" +
-                                  "\n\r                 F1F      F1F1F1    F1F  F1    F1" +
-                                  "\n\r             START     F1F1   F1  F1F   F1F      F1 " +
-                                  "\n\r           F1F        F1       F1F1   F1          F1" +
-                                  "\n\r        F1F           F1F            F1           F1" +
-                                  "\n\r     F1F                 F1F1F         F1F1F      F1" +
-                                  "\n\r   F1F                        F1F1F1F       F1F1F1" +
-                                  "\n\r     F1F                             F1F1" +
-                                  "\n\r     F1                                 F1" +
-                                  "\n\r     F1                                  F1" +
-                                  "\n\r      F1                                F1" +
-                                  "\n\r        F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1");
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.SetCursorPosition(0, Console.CursorTop - 10);
-                    Console.Write("\n\r             START" +
-                                  "\n\r           F1F" +
-                                  "\n\r        F1F" +
-                                  "\n\r     F1F" +
-                                  "\n\r   F1F" +
-                                  "\n\r     F1F" +
-                                  "\n\r     F1" +
-                                  "\n\r     F1" +
-                                  "\n\r      F1" +
-                                  "\n\r        F1F1F1F-71-LAPS-15-TURNS-F1F\n");
-                }
-                else if (keyPressed == ConsoleKey.D2)
-                {
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.SetCursorPosition(0, Console.CursorTop - 17);
-                    Console.Write("                                               " +
-                                  "\n\r                       F1F1-BRAZILIAN-GP-F1F1" +
-                                  "\n\r                    F1F                F1F   F1" +
-                                  "\n\r                 F1F      F1F1F1    F1F  F1    F1" +
-                                  "\n\r             START     F1F1   F1  F1F   F1F      F1 " +
-                                  "\n\r           F1F        F1       F1F1   F1          F1" +
-                                  "\n\r        F1F           F1F            F1           F1" +
-                                  "\n\r     F1F                 F1F1F         F1F1F      F1" +
-                                  "\n\r   F1F                        F1F1F1F       F1F1F1" +
-                                  "\n\r     F1F                             F1F1" +
-                                  "\n\r     F1                                 F1" +
-                                  "\n\r     F1                                  F1" +
-                                  "\n\r      F1                                F1" +
-                                  "\n\r        F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1");
-                    Console.ForegroundColor = ConsoleColor.DarkBlue;
-                    Console.SetCursorPosition(0, Console.CursorTop - 12);
-                    Console.Write("\n\r                                       F1F" +
-                                  "\n\r                          F1F1F1    F1F  F1" +
-                                  "\n\r                       F1F1   F1  F1F   F1F" +
-                                  "\n\r                      F1       F1F1   F1" +
-                                  "\n\r                      F1F            F1" +
-                                  "\n\r                         F1F1F         F1F1F" +
-                                  "\n\r                              F1F1F1F       F1F" +
-                                  "\n\r                                     F1F1" +
-                                  "\n\r                                        F1" +
-                                  "\n\r                                         F1" +
-                                  "\n\r                                        F1" +
-                                  "\n\r                                    1F1F1");
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.SetCursorPosition(0, Console.CursorTop - 12);
-                    Console.Write("\n\r                    F1F" +
-                                  "\n\r                 F1F" +
-                                  "\n\r             START" +
-                                  "\n\r           F1F" +
-                                  "\n\r        F1F" +
-                                  "\n\r     F1F" +
-                                  "\n\r   F1F" +
-                                  "\n\r     F1F" +
-                                  "\n\r     F1" +
-                                  "\n\r     F1" +
-                                  "\n\r      F1" +
-                                  "\n\r        F1F1F1F-71-LAPS-15-TURNS-F1F\n");
-                }
-                else if (keyPressed == ConsoleKey.D3)
-                {
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.SetCursorPosition(0, Console.CursorTop - 17);
-                    Console.Write("                                               " +
-                                  "\n\r                       F1F1-BRAZILIAN-GP-F1F1" +
-                                  "\n\r                    F1F                F1F   F1" +
-                                  "\n\r                 F1F      F1F1F1    F1F  F1    F1" +
-                                  "\n\r             START     F1F1   F1  F1F   F1F      F1 " +
-                                  "\n\r           F1F        F1       F1F1   F1          F1" +
-                                  "\n\r        F1F           F1F            F1           F1" +
-                                  "\n\r     F1F                 F1F1F         F1F1F      F1" +
-                                  "\n\r   F1F                        F1F1F1F       F1F1F1" +
-                                  "\n\r     F1F                             F1F1" +
-                                  "\n\r     F1                                 F1" +
-                                  "\n\r     F1                                  F1" +
-                                  "\n\r      F1                                F1" +
-                                  "\n\r        F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1");
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.SetCursorPosition(0, Console.CursorTop - 13);
-                    Console.Write("\n\r                       F1F1-BRAZILIAN-GP-F1F1" +
-                                  "\n\r                                             F1" +
-                                  "\n\r                                               F1" +
-                                  "\n\r                                                 F1" +
-                                  "\n\r                                                  F1" +
-                                  "\n\r                                                  F1" +
-                                  "\n\r                                                  F1" +
-                                  "\n\r                                               1F1");
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.SetCursorPosition(0, Console.CursorTop - 7);
-                    Console.Write("\n\r                                       F1F" +
-                                  "\n\r                          F1F1F1    F1F  F1" +
-                                  "\n\r             START     F1F1   F1  F1F   F1F" +
-                                  "\n\r           F1F        F1       F1F1   F1" +
-                                  "\n\r        F1F           F1F            F1" +
-                                  "\n\r     F1F                 F1F1F         F1F1F" +
-                                  "\n\r   F1F                        F1F1F1F       F1F" +
-                                  "\n\r     F1F                             F1F1" +
-                                  "\n\r     F1                                 F1" +
-                                  "\n\r     F1                                  F1" +
-                                  "\n\r      F1                                F1" +
-                                  "\n\r        F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1");
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.SetCursorPosition(0, Console.CursorTop - 12);
-                    Console.Write("\n\r                    F1F" +
-                                  "\n\r                 F1F\n\n\n\n\n\n\n\n\n\n\n");
-                }
-                else if (keyPressed == ConsoleKey.D || keyPressed == ConsoleKey.D4)
-                {
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.SetCursorPosition(0, Console.CursorTop - 17);
-                    Console.Write("\n                       F1F1-BRAZILIAN-GP-F1F1" +
-                                  "\n                    F1F                F1F   F1" +
-                                  "\n                 F1F      F1F1F1    F1F  F1    F1" +
-                                  "\n             START     F1F1   F1  F1F   F1F      F1 " +
-                                  "\n           F1F        F1       F1F1   F1          F1" +
-                                  "\n        F1F           F1F            F1           F1" +
-                                  "\n     F1F                 F1F1F         F1F1F      F1" +
-                                  "\n   F1F                        F1F1F1F       F1F1F1" +
-                                  "\n     F1F                             F1F1" +
-                                  "\n     F1                                 F1" +
-                                  "\n     F1                                  F1" +
-                                  "\n      F1                                F1" +
-                                  "\n        F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.SetCursorPosition(0, Console.CursorTop - 13);
-                    Console.Write("                       ____" +
-                                  "\n\r                    __/" +
-                                  "\n\r                 __/" +
-                                  "\n\r             ___/" +
-                                  "\n\r           _/                                    F1" +
-                                  "\n\r        __/" +
-                                  "\n\r      _/" +
-                                  "\n\r" +
-                                  "\n\r   F1F" +
-                                  "\n\r" +
-                                  "\n\r" +
-                                  "\n\r" +
-                                  "\n\r         ______________________________");
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.SetCursorPosition(0, Console.CursorTop - 9);
-                    Console.Write("\n\r             START     F1F1   F1  F1F   F1F" +
-                                  "\n\r" +
-                                  "\n\r" +
-                                  "\n\r" +
-                                  "\n\r" +
-                                  "\n\r" +
-                                  "\n\r" +
-                                  "\n\r" +
-                                  "\n\r      F1");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.SetCursorPosition(0, Console.CursorTop - 9);
-                    Console.Write("\n\r           _/\n\n\n\n\n\n\n\n\n\n");
-                }
-                else if (keyPressed == ConsoleKey.Enter)
-                { i++; }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.SetCursorPosition(0, Console.CursorTop - 17);
-                    Console.Write("                                               " +
-                                  "\n\r                       F1F1-BRAZILIAN-GP-F1F1" +
-                                  "\n\r                    F1F                F1F   F1" +
-                                  "\n\r                 F1F      F1F1F1    F1F  F1    F1" +
-                                  "\n\r             START     F1F1   F1  F1F   F1F      F1 " +
-                                  "\n\r           F1F        F1       F1F1   F1          F1" +
-                                  "\n\r        F1F           F1F            F1           F1" +
-                                  "\n\r     F1F                 F1F1F         F1F1F      F1" +
-                                  "\n\r   F1F                        F1F1F1F       F1F1F1" +
-                                  "\n\r     F1F                             F1F1" +
-                                  "\n\r     F1                                 F1" +
-                                  "\n\r     F1                                  F1" +
-                                  "\n\r      F1                                F1" +
-                                  "\n\r        F1F1F1F-71-LAPS-15-TURNS-F1F1F1F1\n");
+                    case 0:
+                        Console.WriteLine("st position, what?");
+                        break;
+                    case 1:
+                        Console.WriteLine("nd position, lucky, lucky");
+                        break;
+                    case 2:
+                        Console.WriteLine("rd position, good job?");
+                        break;
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 14:
+                    case 15:
+                    case 16:
+                    case 17:
+                    case 18:
+                    case 19:
+                        Console.WriteLine("th position, better luck next time");
+                        break;
                 }
             }
+            else
+            {
+                Console.Write("That concludes the race\n\nYou finished " + (USERp + 1));
+                switch (USERp)
+                {
+                    case 0:
+                        Console.WriteLine("st, congratulations!");
+                        break;
+                    case 1:
+                        Console.WriteLine("nd, good race");
+                        break;
+                    case 2:
+                        Console.WriteLine("rd, nice job");
+                        break;
+                    case 3:
+                        Console.WriteLine("th, close");
+                        break;
+                    case 4:
+                        Console.WriteLine("th, nice");
+                        break;
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                        Console.WriteLine("th, not bad");
+                        break;
+                    case 9:
+                        Console.WriteLine("th, at least it's a point");
+                        break;
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 14:
+                    case 15:
+                        Console.WriteLine("th, disappointing");
+                        break;
+                    case 16:
+                    case 17:
+                    case 18:
+                    case 19:
+                        Console.WriteLine("th, bad");
+                        break;
+                }
+            }
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write("Press 'Enter' to continue");
+            do
+            {
+                key = Console.ReadKey(true);
+            } while (key.Key != ConsoleKey.Enter);
+            Console.Clear();
+            var points = new List<int> { 25, 18, 15, 12, 10, 8, 6, 4, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            int flPoint;
+            Console.ForegroundColor = ConsoleColor.White;
+            for (int i = 0; i < 20; i++)
+            {
+                flPoint = 0;
+                if (i < 10)
+                { Console.ForegroundColor = ConsoleColor.Yellow; }
+                if (i < 9)
+                { Console.Write(" " + (i + 1)); }
+                else
+                { Console.Write(i + 1); }
+                if (lap[i] == USER)
+                {
+                    switch (userTeam)
+                    {
+                        case "Mercedes":
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            break;
+                        case "Red Bull":
+                            Console.ForegroundColor = ConsoleColor.DarkBlue;
+                            break;
+                        case "Ferrari":
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            break;
+                        case "McLaren":
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            break;
+                        case "Alpine":
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            break;
+                        case "AlphaTauri":
+                            Console.ForegroundColor = ConsoleColor.DarkGray;
+                            break;
+                        case "Aston Martin":
+                            Console.ForegroundColor = ConsoleColor.DarkGreen;
+                            break;
+                        case "Williams":
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            break;
+                        case "Alfa Romeo":
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            break;
+                        case "Haas":
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                            break;
+                    }
+                }
+                else
+                {
+                    if (lap[i] == VER || lap[i] == PER)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    }
+                    else if (lap[i] == SAI || lap[i] == LEC)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                    }
+                    else if (lap[i] == RUS || lap[i] == HAM)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    }
+                    else if (lap[i] == NOR || lap[i] == RIC)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    }
+                    else if (lap[i] == OCO || lap[i] == ALO)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                    }
+                    else if (lap[i] == GAS || lap[i] == TSU)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                    }
+                    else if (lap[i] == STR || lap[i] == VET)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    }
+                    else if (lap[i] == ALB || lap[i] == DEV)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                    }
+                    else if (lap[i] == BOT || lap[i] == ZHO)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                    else if (lap[i] == MAG || lap[i] == MSC)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+                }
+                { Console.Write(" |"); }
+                Console.ForegroundColor = ConsoleColor.White;
+                if (lap[i] > 1000)
+                { Console.ForegroundColor = ConsoleColor.DarkGray; }
+                if (lap[i] == VER)
+                { Console.Write(" VER"); }
+                else if (lap[i] == PER)
+                { Console.Write(" PER"); }
+                else if (lap[i] == SAI)
+                { Console.Write(" SAI"); }
+                else if (lap[i] == LEC)
+                { Console.Write(" LEC"); }
+                else if (lap[i] == RUS)
+                { Console.Write(" RUS"); }
+                else if (lap[i] == HAM)
+                { Console.Write(" HAM"); }
+                else if (lap[i] == NOR)
+                { Console.Write(" NOR"); }
+                else if (lap[i] == RIC)
+                { Console.Write(" RIC"); }
+                else if (lap[i] == OCO)
+                { Console.Write(" OCO"); }
+                else if (lap[i] == ALO)
+                { Console.Write(" ALO"); }
+                else if (lap[i] == GAS)
+                { Console.Write(" GAS"); }
+                else if (lap[i] == TSU)
+                { Console.Write(" TSU"); }
+                else if (lap[i] == STR)
+                { Console.Write(" STR"); }
+                else if (lap[i] == VET)
+                { Console.Write(" VET"); }
+                else if (lap[i] == ALB)
+                { Console.Write(" ALB"); }
+                else if (lap[i] == DEV)
+                { Console.Write(" DEV"); }
+                else if (lap[i] == BOT)
+                { Console.Write(" BOT"); }
+                else if (lap[i] == ZHO)
+                { Console.Write(" ZHO"); }
+                else if (lap[i] == MAG)
+                { Console.Write(" MAG"); }
+                else if (lap[i] == MSC)
+                { Console.Write(" MSC"); }
+                else if (lap[i] == USER)
+                { Console.Write($" {userShort}");
+                    if (userGotFL)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.Write("♦");
+                        if (lap[i] < 1001)
+                        { flPoint = 1; }
+                    }
+                }
+                if (i == flHolder)
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.Write("♦");
+                    if (lap[i] < 1001)
+                    { flPoint = 1; }
+                }
+                if (lap[i] > 1001)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    if (lap[i] == USER && userGotFL)
+                        Console.Write(" DNF");
+                    else
+                        Console.Write("  DNF");
+                }
+                Console.ForegroundColor = ConsoleColor.Gray;
+                if (i < 10)
+                {
+                    if (i == flHolder)
+                        Console.Write(" ");
+                    else if (lap[i] == USER && userGotFL)
+                        Console.Write(" ");
+                    else
+                        Console.Write("  "); 
+                    Console.Write((points[i] + flPoint) + "Pts");
+                }
+                if (lap[i] == USER)
+                {
+                    switch (userTeam)
+                    {
+                        case "Mercedes":
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            break;
+                        case "Red Bull":
+                            Console.ForegroundColor = ConsoleColor.DarkBlue;
+                            break;
+                        case "Ferrari":
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            break;
+                        case "McLaren":
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            break;
+                        case "Alpine":
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            break;
+                        case "AlphaTauri":
+                            Console.ForegroundColor = ConsoleColor.DarkGray;
+                            break;
+                        case "Aston Martin":
+                            Console.ForegroundColor = ConsoleColor.DarkGreen;
+                            break;
+                        case "Williams":
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            break;
+                        case "Alfa Romeo":
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            break;
+                        case "Haas":
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                            break;
+                    }
+                }
+                else
+                {
+                    if (lap[i] == VER || lap[i] == PER)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    }
+                    else if (lap[i] == SAI || lap[i] == LEC)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                    }
+                    else if (lap[i] == RUS || lap[i] == HAM)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    }
+                    else if (lap[i] == NOR || lap[i] == RIC)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    }
+                    else if (lap[i] == OCO || lap[i] == ALO)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                    }
+                    else if (lap[i] == GAS || lap[i] == TSU)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                    }
+                    else if (lap[i] == STR || lap[i] == VET)
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    }
+                    else if (lap[i] == ALB || lap[i] == DEV)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                    }
+                    else if (lap[i] == BOT || lap[i] == ZHO)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                    else if (lap[i] == MAG || lap[i] == MSC)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+                }
+                if (i < 3)
+                { Console.Write("_______\n" +
+                                    "              _\\═.o.═/_\n" +
+                                    "             |_|_____|_|"); }
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine();
+            }
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write("Press 'Enter' to continue");
+            do
+            {
+                key = Console.ReadKey(true);
+            } while (key.Key != ConsoleKey.Enter);
         }
-        public static void RedLights()
+        public List<string> Names()
         {
-            Console.CursorVisible = false;
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.SetCursorPosition(0, Console.CursorTop - 21);
-            Console.Write("\r      ·····");
-            Task.Delay(1000).Wait();
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.Write("\r      ·");
-            Task.Delay(1000).Wait();
-            Console.Write("\r      ··");
-            Task.Delay(1000).Wait();
-            Console.Write("\r      ···");
-            Task.Delay(1000).Wait();
-            Console.Write("\r      ····");
-            Task.Delay(1000).Wait();
-            Console.Write("\r      ·····");
-            Task.Delay(1000).Wait();
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("\r      ·····");
-            Task.Delay(1000).Wait();
-            Console.CursorVisible = true;
+            Console.WriteLine("\nWhat's your first name?");
+            string userFirstName = Console.ReadLine();
+            if (userFirstName.Length == 1)
+            {
+                userFirstName = userFirstName.ToUpper();
+            }
+            else if (userFirstName.Length == 0)
+            {
+                userFirstName = "John";
+            }
+            else
+            {
+                userFirstName = userFirstName.Remove(1).ToUpper() + userFirstName.Remove(0, 1).ToLower();
+            }
+            Console.SetCursorPosition(0, Console.CursorTop - 2);
+            Console.Write($"And your last name?    \n{userFirstName} ");
+            string userLastName = Console.ReadLine();
+            if (userLastName.Length == 1)
+            {
+                userLastName = userLastName.ToUpper();
+            }
+            else if (userLastName.Length == 0)
+            {
+                userLastName = "Doe";
+            }
+            else
+            {
+                userLastName = userLastName.Remove(1).ToUpper() + userLastName.Remove(0, 1).ToLower();
+            }
+            string userName = userFirstName + " " + userLastName;
+            string userNameS;
+            if (userLastName.Length == 3)
+            {
+                userNameS = userLastName;
+            }
+            else if (userFirstName.Length + userLastName.Length < 3)
+            {
+                userNameS = userFirstName + userLastName;
+            }
+            else if (userFirstName.Length + userLastName.Length == 3)
+            {
+                userNameS = userFirstName + userLastName;
+            }
+            else if (userFirstName.Length > 1 && userLastName.Length == 1)
+            {
+                userNameS = userFirstName.Remove(2) + userLastName;
+            }
+            else if (userFirstName.Length > 1 && userLastName.Length < 3)
+            {
+                userNameS = userFirstName.Remove(1) + userLastName;
+            }
+            else
+            {
+                userNameS = userLastName.Remove(3);
+            }
+            userNameS = userNameS.ToUpper();
+            var names = new List<string> { userName, userNameS };
+            return names;
         }
         public int MiniGameLap1()
         {
@@ -2805,14 +3217,15 @@ namespace F1_Brazil_GP
                 else
                 { Console.WriteLine("\n1.1" + (stopwatch.Elapsed.Seconds - 2) + "." + stopwatch.Elapsed.Milliseconds); }
                 Console.WriteLine("YOU JUST SET A NEW LAP RECORD");
-                score = 2;
+                score = 1;
             }
+
             else if (stopwatch.ElapsedMilliseconds < 3000)
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("\n1.1" + (stopwatch.Elapsed.Seconds - 2) + "." + stopwatch.Elapsed.Milliseconds);
                 Console.WriteLine("You got the fastest lap");
-                score = Convert.ToInt32(stopwatch.ElapsedMilliseconds / 300);
+                score = Convert.ToInt32(stopwatch.ElapsedMilliseconds / 250);
             }
             else if (stopwatch.Elapsed.Seconds < 12)
             {
